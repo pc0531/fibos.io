@@ -1,6 +1,6 @@
 import 'common'
 import 'jquery'
-import 'bootstrap3'
+//import 'bootstrap3'
 // import Vue from '../js/lib/vue.min.js'
 import 'js/icons'
 import '../js/jquery.i18n.properties'

@@ -183,18 +183,15 @@
 <p><strong>向特定帐号发送 inline <a href=action.md.html>action</a></strong></p>
 <pre><code class="lang-JavaScript"><div class="line-numbers">1
 2
-3
-4</div><span class="hljs-keyword">static</span> trans.send_inline(<span class="hljs-built_in">String</span> account,
+3</div><span class="hljs-keyword">static</span> trans.send_inline(<span class="hljs-built_in">String</span> account,
     <span class="hljs-built_in">String</span> name,
-    <span class="hljs-built_in">Object</span> args,
-    <span class="hljs-built_in">Array</span> authorization = []);
+    <span class="hljs-built_in">Object</span> args);
 </code></pre>
 <p>调用参数:</p>
 <ul>
 <li>account: String, <a href=action.md.html>action</a> 发送者的帐号名称</li>
 <li>name: String, <a href=action.md.html>action</a> 名称</li>
 <li>args: Object, <a href=action.md.html>action</a> 附带的数据</li>
-<li>authorization: Array, <a href=action.md.html>action</a> 的权限</li>
 </ul>
 <hr>
 <h3 id="send_context_free_inline">send_context_free_inline</h3>

@@ -102,10 +102,10 @@ static readonly String action.receiver;
 
 --------------------------
 ### publication_time
-**Long, 返回从1970年1月1日0时0分0秒（UTC，即协调世界时）距离出块时间的毫秒数。**
+**Number, 返回从1970年1月1日0时0分0秒（UTC，即协调世界时）距离出块时间的毫秒数。**
 
 ```JavaScript
-static readonly Long action.publication_time;
+static readonly Number action.publication_time;
 ```
 
 --------------------------
