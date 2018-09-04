@@ -50,7 +50,6 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap3": "^3.3.5",
-    "element-ui": "^2.4.6",
-    "vue.js": "2.5.17-beta.0"
+    "element-ui": "^2.4.6"
   }
 }
