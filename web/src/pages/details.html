@@ -65,6 +65,14 @@
         </div>
     </div>
     <!-- include "../common/footer.html" -->
+    <script>
+        $(function(){
+            var title = document.getElementsByClassName("news-title")[0].innerHTML;
+            if(title){
+                document.title = title;
+            }
+        })
+     </script>
 </body>
 
 </html>

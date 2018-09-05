@@ -6,305 +6,16 @@ import 'js/icons'
 import '../js/jquery.i18n.properties'
 import axios from 'axios'
 
-var browser = {
-  versions: (function() {
-    var u = navigator.userAgent,
-      app = navigator.appVersion
-    return {
-      trident: u.indexOf('Trident') > -1, //IE内核
-      presto: u.indexOf('Presto') > -1, //opera内核
-      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-      iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
-      iPad: u.indexOf('iPad') > -1, //是否iPad
-      webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
-      weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
-      qq: u.match(/\sQQ/i) == ' qq' //是否QQ
-    }
-  })(),
-  language: (navigator.browserLanguage || navigator.language).toLowerCase()
-}
-
-function getPrice() {
-  // var protocol = window.location.protocol
-  // var port = window.location.port;
-  // var hostname = window.location.hostname;
-  // var url = protocol + "//" + hostname + port + "/getExchangeInfo";
-  $.ajax({
-    type: 'GET',
-    data: {},
-    url: '/1.0/app/getExchangeInfo',
-    success: function(data) {
-      $('#myTargetElement').text(data.price)
-    },
-    error: function() {
-      console.log('')
-    }
-  })
-}
-
-Vue.component('Message', {
-  template: `
-    <div class="message">
-      <p :class="['name']">
-        {{message.from.name}}
-      </p>
-      <div class="tele-message-content-wrapper">
-        <div class="tele-message-content" >
-        <div v-for="content in message.messagelist" :class="!content ? 'textdiv' : ''">
-        {{content}}
-        </div>
-        </div>
-        <div class="tele-message-time">
-          <span>{{message.date}}</span>
-        </div>
-      </div>
-    </div>
-    `,
-  props: ['message']
-})
-
-Vue.component('App', {
-  template: `
-      <div id="tele" :class="collapse ? 'tele-collapse' : ''">
-      <div :class="isMobile ? 'hide' : 'bg'">
-      <div class="top">
-      <div class = "top-title">
-      FIBOS 开发 电报群
-      </div>
-      <div class="top-member">{{members}} members</div>
-      <img src="/imgs/blacklogo.png"/>
-      </div>
-          <div class="wrap">
-          <div :class = "loading ? 'loadingshow':'loadingdis'" >
-          <i class="el-icon-loading" ></i>
-          </div>
-            <ul class="messages" ref="messages">
-              <li class="message-container" v-for="message in messages" :key="message.id">
-                <Message :message="message"></Message>
-              </li>
-            </ul>
-          </div>
-          <div class="bottom">
-            <div class="bottom-title">
-              <a @click="toTed">
-                加入电报群和大神一起聊技术
-              </a>
-            </div>
-            <img src="/imgs/toggle-collapse.png" class="bottom-img" @click="toTed"/>
-          </div>
-
-        </div>
-
-        <img :src="imgSrc" alt="" class="toggle-btn" @click="toggleCollapseOrLink" />
-      </div>
-    `,
-  data() {
-    return {
-      collapse: browser.versions.mobile,
-      messages: [],
-      isMobile: browser.versions.mobile,
-      members: 0,
-      allHistoryMessage: [],
-      pageCount: 0,
-      currentPage: 2,
-      loading: false,
-      scrollHeight: 0
-    }
-  },
-  created() {
-    if (!browser.versions.mobile) {
-      this.initWebsocket()
-    }
-  },
-  methods: {
-    toggleCollapseOrLink() {
-      if (browser.versions.mobile) {
-        window.open('https://t.me/FIBOSIO')
-        return
-      }
-      this.collapse = !this.collapse
-    },
-    toTed() {
-      window.open('/t.html')
-    },
-    pushMessage(messages, isHistory, pageCount) {
-      // let latestMassage = this.messages.concat(messages)
-      // this.messages = latestMassage.map(function (ele) {
-      //   if (ele.text) {
-
-      //     var messagelist = ele.text.split('↵');
-
-      //     // ele.messagelist = messagelist;
-      //     alert("messagelist:"+messagelist.length)
-      //     return ele
-      //   }
-      // });
-      let latestMassage
-      if (isHistory) {
-        this.allHistoryMessage = messages
-        //this.page = (messages.length % 20 === 0 ? 0 : 1) + parseInt(messages.length / 20);
-        this.pageCount = pageCount
-        //let initMessage = messages.slice(messages.length - 20);
-        latestMassage = messages.concat(this.messages)
-      } else {
-        latestMassage = this.messages.concat(messages)
-      }
-      this.messages = this.transferMessage(latestMassage)
-
-      let e = this.$refs.messages
-      scroll = e.scrollHeight - e.scrollTop
-      if (isHistory) {
-        this.$nextTick(function() {
-          e.scrollTop = e.scrollHeight
-        })
-      }
-      if (scroll >= 300 && scroll <= 600) {
-        this.$nextTick(function() {
-          e.scrollTop = e.scrollHeight
-        })
-      }
-    },
-    pushMembers(data) {
-      this.members = data
-    },
-    transferMessage(messages) {
-      return messages.map(function(ele) {
-        if (ele.text) {
-          var escapetext = escape(ele.text)
-          var escapetextlist = escapetext.split('%0A')
-          var messagelist = escapetextlist.map(function(ele) {
-            return unescape(ele)
-          })
-          ele.messagelist = messagelist
-          return ele
-        }
-      })
-    },
-    async getLastPageMessage(page) {
-      //this.socket = new WebSocket(``)
-      var protocol = window.location.protocol
-      var host = window.location.host
-      let url = `/1.0/app/getTgHistory/${page}`
-      //let url = `http://115.47.142.152:9090/getTgHistory/${page}`
-      this.loading = true
-      const result = await axios({
-        method: 'Get',
-        url
-      })
-      //alert(JSON.stringify(result))
-
-      return result
-    },
-
-    // addMessage() {
-    //   let currentPage = this.currentPage;
-    //   alert("currentPage:" + currentPage);
-    //   let allHistoryMessage = this.allHistoryMessage;
-    //   alert("allHistoryMessage:" + allHistoryMessage.length);
-    //   let nextMessages = [];
-    //   if (currentPage < this.page) {
-    //     nextMessages = allHistoryMessage.slice(allHistoryMessage.length - (currentPage + 1) * 20, allHistoryMessage.length - currentPage * 20)
-    //   } else {
-    //     nextMessages = allHistoryMessage.slice(0, allHistoryMessage.length - currentPage * 20);
-    //   }
-    //   alert("nextMessages:" + nextMessages.length);
-    //   this.messages = this.messages.shift(this.transferMessage(nextMessages))
-    //   this.currentPage = this.currentPage + 1;
-    // },
-
-    scrollDid() {
-      let e = this.$refs.messages
-      // let currentPage = this.currentPage;
-      // scroll = e.scrollHeight - e.scrollTop;
-      let that = this
-      $('.messages').scroll(function() {
-        if (e.scrollTop === 0 && that.currentPage <= that.pageCount && !that.loading) {
-          //alert("scrollHeight:" + e.scrollHeight);
-          let currentHeight = e.scrollHeight
-          let nextMessages = []
-          that
-            .getLastPageMessage(that.currentPage)
-            .then(res => {
-              nextMessages = res.data.messages
-              that.loading = false
-              that.messages = that.transferMessage(nextMessages).concat(that.messages)
-              that.currentPage = that.currentPage + 1
-            })
-            .catch(() => {
-              alert('请刷新页面重试')
-            })
-            .finally(() => {
-              that.$nextTick(() => {
-                e.scrollTop = e.scrollHeight - currentHeight - 10
-              })
-            })
-
-          // if (that.currentPage + 1 < that.page) {
-          //   nextMessages = that.allHistoryMessage.slice(that.allHistoryMessage.length - (that.currentPage + 1) * 20, that.allHistoryMessage.length - that.currentPage * 20)
-          // } else {
-          //   nextMessages = that.allHistoryMessage.slice(0, that.allHistoryMessage.length - that.currentPage * 20);
-          // }
-        }
-      })
-    },
-
-    initWebsocket() {
-      var protocol = window.location.protocol
-      var host = window.location.host
-
-      // var message = [{
-      //   text:"sadasd↵↵1111",
-      //   id:1,
-      //   name
-      // }]
-      // this.pushMessage(message);
-
-      this.socket = new WebSocket(`${protocol.indexOf('https') >= 0 ? 'wss' : 'ws'}://${host}/1.0/push`)
-      //this.socket = new WebSocket('ws://115.47.142.152:9090/1.0/push');
-      //this.socket = new WebSocket('ws://fibos.io/1.0/push');
-
-      this.socket.onmessage = e => {
-        var d = JSON.parse(e.data)
-        if (d.data && d.data.messages) {
-          this.pushMessage(d.data.messages, d.data.isHistory, d.data.pageCount)
-          // if ($('ul.messages')[0].scrollHeight = $('ul.messages').scrollTop() + $(".wrap").height()) {
-          //   $('ul.messages').scrollTop($('ul.messages')[0].scrollHeight)
-          // }
-        }
-        if (d.data && d.data.members) {
-          this.pushMembers(d.data.members)
-        }
-      }
-    }
-  },
-  computed: {
-    imgSrc() {
-      return this.collapse ? '/imgs/toggle-collapse.png' : '/imgs/toggle-open.png'
-    }
-  },
-  mounted() {
-    this.scrollDid()
-  }
-})
-
-new Vue({
-  el: '#tele-app-wrapper',
-  template: `<App />`
-})
-
-$(function() {
-  getPrice()
-  setInterval(getPrice, 20000)
+$(function () {
   var localLanguage = localStorage.getItem('fibosLanguage')
   if (localLanguage) {
     changeLanguage(JSON.parse(localLanguage))
   } else {
     changeLanguage('zh')
   }
+
+  getPrice()
+  setInterval(getPrice, 20000)
 
   function changeLanguage(language) {
     localStorage.setItem('fibosLanguage', JSON.stringify(language))
@@ -314,7 +25,7 @@ $(function() {
       path: '../i18n/', //资源文件路径
       mode: 'map', //用Map的方式使用资源文件中的值
       language: `${language === 'zh' ? 'zh' : 'en'} `,
-      callback: function() {
+      callback: function () {
         //加载成功后设置显示内容
 
         $('#Home').html($.i18n.prop('Home'))
@@ -408,11 +119,307 @@ $(function() {
     window.document.cookie = 'lang' + '=' + language + ';'
   }
 
-  $('#language-zh').click(function() {
+  $('#language-zh').click(function () {
     changeLanguage('zh')
   })
 
-  $('#language-en').click(function() {
+  $('#language-en').click(function () {
     changeLanguage('en')
   })
+})
+
+var browser = {
+  versions: (function () {
+    var u = navigator.userAgent,
+      app = navigator.appVersion
+    return {
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+      iPad: u.indexOf('iPad') > -1, //是否iPad
+      webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+      qq: u.match(/\sQQ/i) == ' qq' //是否QQ
+    }
+  })(),
+  language: (navigator.browserLanguage || navigator.language).toLowerCase()
+}
+
+function getPrice() {
+  // var protocol = window.location.protocol
+  // var port = window.location.port;
+  // var hostname = window.location.hostname;
+  // var url = protocol + "//" + hostname + port + "/getExchangeInfo";
+  $.ajax({
+    type: 'GET',
+    data: {},
+    url: '/1.0/app/getExchangeInfo',
+    success: function (data) {
+      $('#myTargetElement').text(data.price)
+    },
+    error: function () {
+      console.log('')
+    }
+  })
+}
+
+Vue.component('Message', {
+  template: `
+    <div class="message">
+      <p :class="['name']">
+        {{message.from.name}}
+      </p>
+      <div class="tele-message-content-wrapper">
+        <div class="tele-message-content" >
+        <div v-for="content in message.messagelist" :class="!content ? 'textdiv' : ''">
+        {{content}}
+        </div>
+        </div>
+        <div class="tele-message-time">
+          <span>{{message.date}}</span>
+        </div>
+      </div>
+    </div>
+    `,
+  props: ['message']
+})
+
+Vue.component('App', {
+  template: `
+      <div id="tele" :class="collapse ? 'tele-collapse' : ''">
+      <div :class="isMobile ? 'hide' : 'bg'">
+      <div class="top">
+      <div class = "top-title">
+      FIBOS 开发 电报群
+      </div>
+      <div class="top-member">{{members}} members</div>
+      <img src="/imgs/blacklogo.png"/>
+      </div>
+          <div class="wrap">
+          <div :class = "loading ? 'loadingshow':'loadingdis'" >
+          <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+          </div>
+            <ul class="messages" ref="messages">
+              <li class="message-container" v-for="message in messages" :key="message.id">
+                <Message :message="message"></Message>
+              </li>
+            </ul>
+          </div>
+          <div class="bottom">
+            <div class="bottom-title">
+              <a @click="toTed">
+                加入电报群和大神一起聊技术
+              </a>
+            </div>
+            <img src="/imgs/toggle-collapse.png" class="bottom-img" @click="toTed"/>
+          </div>
+
+        </div>
+
+        <img :src="imgSrc" alt="" class="toggle-btn" @click="toggleCollapseOrLink" />
+      </div>
+    `,
+  data() {
+    return {
+      collapse: browser.versions.mobile,
+      messages: [],
+      isMobile: browser.versions.mobile,
+      members: 0,
+      allHistoryMessage: [],
+      pageCount: 0,
+      currentPage: 2,
+      loading: false,
+      scrollHeight: 0
+    }
+  },
+  created() {
+    if (!browser.versions.mobile) {
+      this.initWebsocket()
+    }
+  },
+  methods: {
+    toggleCollapseOrLink() {
+      if (browser.versions.mobile) {
+        window.open('https://t.me/FIBOSIO')
+        return
+      }
+      this.collapse = !this.collapse
+    },
+    toTed() {
+      window.open('/t.html')
+    },
+    pushMessage(messages, isHistory, pageCount) {
+      // let latestMassage = this.messages.concat(messages)
+      // this.messages = latestMassage.map(function (ele) {
+      //   if (ele.text) {
+
+      //     var messagelist = ele.text.split('↵');
+
+      //     // ele.messagelist = messagelist;
+      //     alert("messagelist:"+messagelist.length)
+      //     return ele
+      //   }
+      // });
+      let latestMassage
+      if (isHistory) {
+        this.allHistoryMessage = messages
+        //this.page = (messages.length % 20 === 0 ? 0 : 1) + parseInt(messages.length / 20);
+        this.pageCount = pageCount
+        //let initMessage = messages.slice(messages.length - 20);
+        latestMassage = messages.concat(this.messages)
+      } else {
+        latestMassage = this.messages.concat(messages)
+      }
+      this.messages = this.transferMessage(latestMassage)
+
+      let e = this.$refs.messages
+      scroll = e.scrollHeight - e.scrollTop
+      if (isHistory) {
+        this.$nextTick(function () {
+          e.scrollTop = e.scrollHeight
+        })
+      }
+      if (scroll >= 300 && scroll <= 600) {
+        this.$nextTick(function () {
+          e.scrollTop = e.scrollHeight
+        })
+      }
+    },
+    pushMembers(data) {
+      this.members = data
+    },
+    transferMessage(messages) {
+      return messages.map(function (ele) {
+        if (ele.text) {
+          var escapetext = escape(ele.text)
+          var escapetextlist = escapetext.split('%0A')
+          var messagelist = escapetextlist.map(function (ele) {
+            return unescape(ele)
+          })
+          ele.messagelist = messagelist
+          return ele
+        }
+      })
+    },
+    async getLastPageMessage(page) {
+      //this.socket = new WebSocket(``)
+      var protocol = window.location.protocol
+      var host = window.location.host
+      let url = `/1.0/app/getTgHistory/${page}`
+      //let url = `http://115.47.142.152:9090/getTgHistory/${page}`
+      this.loading = true
+      const result = await axios({
+        method: 'Get',
+        url
+      })
+      //alert(JSON.stringify(result))
+
+      return result
+    },
+
+    // addMessage() {
+    //   let currentPage = this.currentPage;
+    //   alert("currentPage:" + currentPage);
+    //   let allHistoryMessage = this.allHistoryMessage;
+    //   alert("allHistoryMessage:" + allHistoryMessage.length);
+    //   let nextMessages = [];
+    //   if (currentPage < this.page) {
+    //     nextMessages = allHistoryMessage.slice(allHistoryMessage.length - (currentPage + 1) * 20, allHistoryMessage.length - currentPage * 20)
+    //   } else {
+    //     nextMessages = allHistoryMessage.slice(0, allHistoryMessage.length - currentPage * 20);
+    //   }
+    //   alert("nextMessages:" + nextMessages.length);
+    //   this.messages = this.messages.shift(this.transferMessage(nextMessages))
+    //   this.currentPage = this.currentPage + 1;
+    // },
+
+    scrollDid() {
+      let e = this.$refs.messages
+      // let currentPage = this.currentPage;
+      // scroll = e.scrollHeight - e.scrollTop;
+      let that = this
+      $('.messages').scroll(function () {
+        if (e.scrollTop === 0 && that.currentPage <= that.pageCount && !that.loading) {
+          //alert("scrollHeight:" + e.scrollHeight);
+          let currentHeight = e.scrollHeight
+          let nextMessages = []
+          that
+            .getLastPageMessage(that.currentPage)
+            .then(res => {
+              nextMessages = res.data.messages
+              that.loading = false
+              that.messages = that.transferMessage(nextMessages).concat(that.messages)
+              that.currentPage = that.currentPage + 1
+            })
+            .catch(() => {
+              alert('请刷新页面重试')
+            })
+            .finally(() => {
+              that.$nextTick(() => {
+                e.scrollTop = e.scrollHeight - currentHeight - 10
+              })
+            })
+
+          // if (that.currentPage + 1 < that.page) {
+          //   nextMessages = that.allHistoryMessage.slice(that.allHistoryMessage.length - (that.currentPage + 1) * 20, that.allHistoryMessage.length - that.currentPage * 20)
+          // } else {
+          //   nextMessages = that.allHistoryMessage.slice(0, that.allHistoryMessage.length - that.currentPage * 20);
+          // }
+        }
+      })
+    },
+
+    initWebsocket() {
+      var protocol = window.location.protocol
+      var host = window.location.host
+
+      // var message = [{
+      //   text:"sadasd↵↵1111",
+      //   id:1,
+      //   name
+      // }]
+      // this.pushMessage(message);
+
+      this.socket = new WebSocket(`${protocol.indexOf('https') >= 0 ? 'wss' : 'ws'}://${host}/1.0/push`)
+      //this.socket = new WebSocket('ws://115.47.142.152:9090/1.0/push');
+      //this.socket = new WebSocket('ws://fibos.io/1.0/push');
+
+      this.socket.onmessage = e => {
+        var d = JSON.parse(e.data)
+        if (d.data && d.data.messages) {
+          this.pushMessage(d.data.messages, d.data.isHistory, d.data.pageCount)
+          // if ($('ul.messages')[0].scrollHeight = $('ul.messages').scrollTop() + $(".wrap").height()) {
+          //   $('ul.messages').scrollTop($('ul.messages')[0].scrollHeight)
+          // }
+        }
+        if (d.data && d.data.members) {
+          this.pushMembers(d.data.members)
+        }
+      }
+    }
+  },
+  computed: {
+    imgSrc() {
+      return this.collapse ? '/imgs/toggle-collapse.png' : '/imgs/toggle-open.png'
+    }
+  },
+  mounted() {
+    this.scrollDid()
+  }
+})
+
+new Vue({
+  el: '#tele-app-wrapper',
+  template: `<App />`
 })
