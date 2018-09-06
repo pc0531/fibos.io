@@ -46,6 +46,21 @@ let r = ctx.excreateSync(name, "100000000000.0000 ABC",  0, '0.0000 ABC','0.0000
 console.log(r);
 ```
 
+##### 增发普通通证
+
+```javascript
+//初始化 fibos 客户端
+...
+let name = "fibostest123";
+let ctx = fibos.contractSync("eosio.token");
+let r = ctx.exissueSync(name, "1000000.0000 ABC", "issue to fibostest123", {
+				authorization: name
+			})
+console.log(r);
+```
+
+**Tips** : 只有普通通证可以进行增发操作，智能通证不支持增发！
+
 #### 发行智能通证
 
 ```js
@@ -66,7 +81,7 @@ console.log(r);
 ```javascript
 //初始化 fibos 客户端
 ...
-let ctx = fibos_client.contractSync("eosio.token");
+let ctx = fibos.contractSync("eosio.token");
 let name = "fibostest123"
 let result = ctx.exchangeSync(name, "1.0000 FO@eosio", `0.0000 AAA@fibostest123`, "exchange FO to AAA", {
     authorization: name
@@ -80,6 +95,20 @@ console.log(result);
 let rs = fibos.getTableRowsSync(true, "eosio.token", "fibostest123", "accounts");
 console.log(rs);
 ```
+
+#### 转账
+
+```javascript
+//初始化 fibos 客户端
+...
+let ctx = fibos.contractSync("eosio.token");
+var r = ctx.extransferSync("fibostest123", "fibostest321", "10.0000 ADC@fibostest123", "trasnfer to fibostest321", {
+			authorization: "fibostest123"
+		});
+console.log(r);
+```
+
+转账的目标账户必须要在 FIBOS 中存在，且转账的最大数量不能超过你的余额，精度也要与转账的 Token 精度一致。
 
 ### 销毁通证
 
