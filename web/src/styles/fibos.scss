@@ -599,11 +599,6 @@ section.dapps {
         background-size: 100%;
       }
     }
-    .lastVas{
-      @media (max-width: 768px) {
-      display: none !important;
-    }
-  }
     @media (min-width: 992px) {
       .dapp {
         display: inline-block;
@@ -1126,6 +1121,9 @@ section.links {
 
 #tele.tele-collapse .bg {
   transform: translateX(100%);
+  position: fixed;
+    right: 12px;
+    bottom: 120px;
 }
 
 #tele.tele-collapse .hide {

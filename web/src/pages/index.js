@@ -14,7 +14,13 @@ $(function () {
     changeLanguage('zh')
   }
 
-  getPrice()
+  getPrice().finally(() => {
+    new Vue({
+      el: '#tele-app-wrapper',
+      template: `<App />`
+    })
+  }
+  )
   setInterval(getPrice, 20000)
 
   function changeLanguage(language) {
@@ -95,6 +101,7 @@ $(function () {
         $('#ExchangeFoWord').html($.i18n.prop('ExchangeFoWord'))
         $('#SafeAndFast').html($.i18n.prop('SafeAndFast'))
         $('#SQDownload').html($.i18n.prop('SQDownload'))
+        $('#FoTokenDes').html($.i18n.prop('FoTokenDes'))
         var FastHeight = window.document.getElementById('Fast').scrollHeight
         var StableHeight = window.document.getElementById('Stable').scrollHeight
         if (language === 'zh') {
@@ -150,20 +157,18 @@ var browser = {
   language: (navigator.browserLanguage || navigator.language).toLowerCase()
 }
 
-function getPrice() {
-  // var protocol = window.location.protocol
-  // var port = window.location.port;
-  // var hostname = window.location.hostname;
-  // var url = protocol + "//" + hostname + port + "/getExchangeInfo";
+async function getPrice() {
   $.ajax({
     type: 'GET',
     data: {},
     url: '/1.0/app/getExchangeInfo',
     success: function (data) {
       $('#myTargetElement').text(data.price)
+      return true;
     },
     error: function () {
       console.log('')
+      return false;
     }
   })
 }
@@ -419,7 +424,3 @@ Vue.component('App', {
   }
 })
 
-new Vue({
-  el: '#tele-app-wrapper',
-  template: `<App />`
-})
