@@ -54,6 +54,12 @@ body {
       margin-top: 20px;
       height: 60px;
     }
+    @media (max-width: 574px) {
+      .phoneImg {
+        margin-top: 20px;
+        height: 40px;
+      }
+    }
   }
   .navbar-nav .nav-link {
     color: #fff;
@@ -68,6 +74,34 @@ body {
 .navbar-toggler.index-navbar-toggler {
   transform: translateY(0.5rem);
 }
+
+.Buybtn-left{
+  text-align: right;
+}
+
+.Buybtn-right{
+  text-align: left;
+}
+
+@media (max-width: 574px) {
+  .PhoneFooter{
+    display: none;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .Buybtn-left{
+    text-align: center;
+  }
+  
+  .Buybtn-right{
+    text-align: center;
+  }
+}
+
+
 
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-collapse {
@@ -234,6 +268,19 @@ body {
    }
 }
 
+.btn-center {
+  padding: 0.85rem 2.5rem;
+  border-radius: 2px;
+  margin-top: 40px;
+  width: 16rem;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-weight: bold;
+  border: 0;
+  line-height: 33px;
+  height: 60px;
+}
+
 .sectwo{
   padding: 152px 0 62px;
   cursor: pointer;
@@ -380,6 +427,14 @@ section.fo {
     font-weight: 400;
     font-family: 'Open Sans';
   }
+
+  .big-mark-small {
+    font-size: 2rem;
+    color: $green;
+    font-weight: 400;
+    font-family: 'Open Sans';
+  }
+
   .btn-buy {
     margin: 10px 5px 0;
     border-radius: 0;

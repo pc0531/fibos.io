@@ -14,14 +14,8 @@ $(function () {
     changeLanguage('zh')
   }
 
-  getPrice().finally(() => {
-    new Vue({
-      el: '#tele-app-wrapper',
-      template: `<App />`
-    })
-  }
-  )
-  setInterval(getPrice, 20000)
+  getBlockChainInfo()
+  //setInterval(getPrice, 20000)
 
   function changeLanguage(language) {
     localStorage.setItem('fibosLanguage', JSON.stringify(language))
@@ -62,7 +56,6 @@ $(function () {
         $('#Bancor').html($.i18n.prop('Bancor'))
         $('#Onestep').html($.i18n.prop('Onestep'))
         $('#FIBOSDev').html($.i18n.prop('FIBOSDev'))
-        $('#btn-bancor-download').html($.i18n.prop('btn-bancor-download'))
         $('#FIBOSRoadmap').html($.i18n.prop('FIBOSRoadmap'))
         $('#TestNet').html($.i18n.prop('TestNet'))
         $('#MainNet').html($.i18n.prop('MainNet'))
@@ -102,6 +95,21 @@ $(function () {
         $('#SafeAndFast').html($.i18n.prop('SafeAndFast'))
         $('#SQDownload').html($.i18n.prop('SQDownload'))
         $('#FoTokenDes').html($.i18n.prop('FoTokenDes'))
+        $('#FoWebDes').html($.i18n.prop('FoWebDes'))
+        $('#IndexLink').html($.i18n.prop('IndexLink'))
+        $('#Dapps1').html($.i18n.prop('Dapps1'))
+        $('#Documentation1').html($.i18n.prop('Documentation1'))
+        $('#slogan1').html($.i18n.prop('slogan1'))
+        $('#desc1').html($.i18n.prop('desc1'))
+        $('#Roadmap1').html($.i18n.prop('Roadmap1'))
+        $('#News0').html($.i18n.prop('News0'))
+        $('#DEV_Community1').html($.i18n.prop('DEV_Community1'))
+        $('#Block').html($.i18n.prop('Block'))
+        $('#Deals').html($.i18n.prop('Deals'))
+        $('#Users').html($.i18n.prop('Users'))
+        $('#FoNum').html($.i18n.prop('FoNum'))
+        $('#Fobuy').html($.i18n.prop('Fobuy'))
+        $('#Declare').html($.i18n.prop('Declare'))
         var FastHeight = window.document.getElementById('Fast').scrollHeight
         var StableHeight = window.document.getElementById('Stable').scrollHeight
         if (language === 'zh') {
@@ -157,18 +165,32 @@ var browser = {
   language: (navigator.browserLanguage || navigator.language).toLowerCase()
 }
 
-async function getPrice() {
+function setInfo(data) {
+  $('#BlockNumber').text(data.BlockNumber);
+  $('#TransactionNumber').text(data.TransactionNumber);
+  $('#NumberOfUsers').text(data.NumberOfUsers);
+  $('#FOCirculation').text(data.FOCirculation);
+}
+
+
+function getBlockChainInfo() {
   $.ajax({
     type: 'GET',
     data: {},
-    url: '/1.0/app/getExchangeInfo',
-    success: function (data) {
-      $('#myTargetElement').text(data.price)
-      return true;
+    url: '/1.0/app/getBlockChainInfo',
+    async: false,
+    success: async function (data) {
+      await setInfo(data);
+      new Vue({
+        el: '#tele-app-wrapper',
+        template: `<App />`
+      })
     },
     error: function () {
-      console.log('')
-      return false;
+      new Vue({
+        el: '#tele-app-wrapper',
+        template: `<App />`
+      })
     }
   })
 }
@@ -200,7 +222,7 @@ Vue.component('App', {
       <div :class="isMobile ? 'hide' : 'bg'">
       <div class="top">
       <div class = "top-title">
-      FIBOS 开发 电报群
+      FIBOS 初学者 电报群
       </div>
       <div class="top-member">{{members}} members</div>
       <img src="/imgs/blacklogo.png"/>

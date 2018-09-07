@@ -601,7 +601,15 @@ $(function () {
                     $('#News').html($.i18n.prop('News'));
                     $('#Download').html($.i18n.prop('Download'));
                     $('#Dapps').html($.i18n.prop('Dapps'));
-                    
+
+                    $('#slogan1').html($.i18n.prop('slogan1'))
+                    $('#desc1').html($.i18n.prop('desc1'))
+                    $('#IndexLink').html($.i18n.prop('IndexLink'))
+                    $('#Roadmap1').html($.i18n.prop('Roadmap1'))
+                    $('#News0').html($.i18n.prop('News0'))
+                    $('#Dapps1').html($.i18n.prop('Dapps1'))
+                    $('#DEV_Community1').html($.i18n.prop('DEV_Community1'))
+                    $('#Documentation1').html($.i18n.prop('Documentation1'))
                 }
             });
         }

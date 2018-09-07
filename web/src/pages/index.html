@@ -247,13 +247,11 @@
                     <div class="col-lg-2 col-3">
                         <img class="foimg" id="buyfoImg" src="/imgs/fologo.png" alt="兑换 FO 智能通证" height="63">
                     </div>
-                    <div class="col-5 text-left line col-lg-5" id="Pass">智能通行证</div>
+                    <div class="col-5 text-left line col-lg-5" id="Pass">智能通证</div>
                 </div>
             </h3>
             <div class="row step">
-                <!-- <div class="col fo-step-pc">
-                </div> -->
-                <div class="col-md-6 fo-step col-sm-12 col-xs-12">
+                <!-- <div class="col-md-6 fo-step col-sm-12 col-xs-12">
                     <div class="fr">
                         <span class="big-mark">10,000,000,000</span>&nbsp;FO
                         <div class="fo-step-text" id="Total">FO 初始发行量</div>
@@ -266,24 +264,52 @@
                         <span class="big-mark" id="myTargetElement">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;FO
                         <div class="fo-step-text" id="Rate">当前预计兑换比率</div>
                     </div>
-                </div>
-                <!-- <div class="col fo-step-pc">
                 </div> -->
-                <!-- <div class="col fo-step">
+                <div class="col-lg-3 col-md-6  col-sm-6 col-xs-12 text-center">
+                    <span class="big-mark-small" id="BlockNumber">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <div id="Block">区块数</div>
+                </div>
+                <div class="col-lg-3 col-md-6  col-sm-6 col-xs-12 text-center">
+                    <span class="big-mark-small" id="TransactionNumber">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <div id="Deals">交易数</div>
+                </div>
+                <div class="col-lg-2 col-md-6  col-sm-6 col-xs-12 text-center">
+                    <span class="big-mark-small" id="NumberOfUsers">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <div id="Users">注册用户数</div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center">
+                    <span class="big-mark-small" id="FOCirculation">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;FO
+                    <div id="FoNum">FO 流通量</div>
+                </div>
+
+                <!-- <div class="col-lg-3 col-md-6  col-sm-6 col-xs-12 text-center">
+                    <span class="big-mark-small" id="BlockNumber">1,674,852</span>
+                    <div id="Block">区块数</div>
+                </div>
+                <div class="col-lg-2 col-md-6  col-sm-6 col-xs-12 text-center">
+                    <span class="big-mark-small" id="TransactionNumber">3,746,505</span>
+                    <div id="Deals">交易数</div>
+                </div>
+                <div class="col-lg-2 col-md-6  col-sm-6 col-xs-12 text-center">
+                    <span class="big-mark-small" id="NumberOfUsers">37,471</span>
+                    <div id="Users">注册用户数</div>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 text-center">
+                    <span class="big-mark-small" id="FOCirculation">452,707,887.9708</span>&nbsp;FO
+                    <div id="FoNum">FO 流通量</div>
                 </div> -->
             </div>
-            <!-- <div class="row">
-                <div class="col-6 text-center">
-                </div>
-                <div class="col-6 text-center">
-                </div>
-            </div> -->
             <div class="row">
-                <div class="col-12 text-center">
-                    <a id="btn-bancor-download" href="/5b8b51baaba908441dbbfc81.html" class="btn btn-lg btn-white btn-buy" style="background-color: #19d;color: white">
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <a id="Fobuy" href="/5b8b51baaba908441dbbfc81.html" class="btn btn-lg btn-white btn-buy " style="background-color: #19d;color: white">
                         FO 兑换教程
                     </a>
                 </div>
+                <!-- <div class="col-xs-12 col-sm-6 .col-md-6 Buybtn-right">
+                    <a id="Declare" href="/5b8e788b3cd72823af21dc28.html" class="btn btn-lg btn-white btn-buy " style="background-color: #19d;color: white">
+                        不建议炒作声明
+                    </a>
+                </div> -->
             </div>
         </div>
     </section>
@@ -434,21 +460,6 @@
                     </a>
                 </div>
                 <div class="dapp">
-                    <a href="http://www.51Token.im" target="_blank" class="link">
-                        <div class="card">
-                            <div class="card-img-top">
-                                <img src="/imgs/dapp3.png" alt="">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">51token</h5>
-                                <p class="card-text" id="51TokenDes">
-                                    去中心化的手机钱包Dapp，向用户推荐好玩好用的Dapp
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="dapp">
                     <a href="http://www.onechain.one" target="_blank" class="link">
                         <div class="card">
                             <div class="card-img-top">
@@ -461,10 +472,8 @@
                             </div>
 
                         </div>
+                    </a>
                 </div>
-                </a>
-            </div>
-            <div class="row">
                 <div class="dapp">
                     <a href="http://explorer.fibos.rocks/voting" target="_blank" class="link">
                         <div class="card">
@@ -480,6 +489,9 @@
                         </div>
                     </a>
                 </div>
+            </div>
+            <div class="row">
+
                 <div class="dapp">
                     <a href="http://foironman.com" target="_blank" class="link">
                         <div class="card">
@@ -525,6 +537,22 @@
                         </div>
                     </a>
                 </div>
+                <div class="dapp">
+                    <a href="https://fotoolkit.com" target="_blank" class="link">
+                        <div class="card">
+                            <div class="card-img-top">
+                                <img src="/imgs/dappweb.png" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Fotoolkit</h5>
+                                <p class="card-text" id="FoWebDes">
+                                    全功能FO网页钱包
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
@@ -628,41 +656,49 @@
         <section class="links">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                        <h5 id="Doc">开发文档</h5>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-12 PhoneFooter">
+                        <h5>FIBOS</h5>
                         <ul>
-                            <li>
-                                <a href="/docs/guide/basic/about.md.html" id="DEV_Guides1">开发指南</a>
+                            <li id="slogan1">
+                                开发者友好的区块链生态系统
                             </li>
-                            <li>
-                                <a href="/docs/manual/module/readme.md.html" id="Basic_Modules1">基础模块</a>
+                            <li id="desc1">
+                                JavaScript 开发 + BANCOR 协议智能通证 + 开发者服务，实现了快速开发、快速部署和稳定且流动的通证体系，帮助开发者一步进入区块链时代。
                             </li>
-                            <li>
-                                <a href="/docs/manual/object/readme.md.html" id="Built_in_Objects1">内置对象</a>
-                            </li>
-                            <!-- <li>
-                                <a href="#">服务端模块热更新</a>
-                            </li> -->
                         </ul>
                     </div>
-                    <!-- <div class="col-lg-2">
-                        <h5>关于 FIBOS</h5>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-12 PhoneFooter">
+                        <h5 id="IndexLink">站内链接</h5>
                         <ul>
                             <li>
-                                <a href="#">关于 FIBOS 项目</a>
+                                <a href="#roadmap" id="Roadmap1">路线图</a>
                             </li>
                             <li>
-                                <a href="#">核心团队</a>
+                                <a href="/news.html" id="News0">新闻</a>
                             </li>
                             <li>
-                                <a href="#">媒体关系</a>
+                                <a href="http://bbs.fibos.io" target="_blank">BBS</a>
                             </li>
                             <li>
-                                <a href="#">下载 LOGO</a>
+                                <a href="#dapps" id="Dapps1">社区应用</a>
                             </li>
                         </ul>
-                    </div> -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-12">
+                        <h5 id="DEV_Community1">开发社区</h5>
+                        <ul>
+                            <li>
+                                <a href="docs/guide/basic/about.md.html" id="Documentation1">开发者文档</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/fibosio" target="_blank">Github</a>
+                            </li>
+                            <li>
+                                <a href="/faq.html">FAQ</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-12">
                         <h5 id="ContactUs">联系我们</h5>
                         <ul class="social-media">
                             <li>
