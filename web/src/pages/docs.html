@@ -59,24 +59,43 @@
     <div class="page-body">
         <div class="container row">
             <div class="sidebar hidden-xs col-lg-2">
-                <div class="panel-group" id="accordion" role="tablist">
-                    <%for(var g in groups){%>
-                        <div class="card">
-                            <div class="card-header" role="tab" id="headingOne">
-                                <h4 class="card-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<%-g%>" aria-controls="collapse_<%-g%>">
-                                        <%-groups[g].title%>
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapse_<%-g%>" class="panel-collapse collapse <%if(group==g){%>show<%}%>" aria-labelledby="headingOne">
-                                <div class="card-body">
-                                    <%-groups[g].toc%>
+                <div class="card">
+                    <div class="card-header top" role="tab" id="headingOne">
+                        <h4 class="card-title">
+                            <a data-toggle="collapse" href="#collapse_documents" aria-controls="collapse_documents" class="collapse_documents">
+                                开发者文档
+                                <!-- <div class="firstImg firstDown" id="firstImg">
+                                </div> -->
+                                <img src="../../../../imgs/firstDown.png" alt="" id="firstImage">
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="collapse_documents" class="panel-collapse collapse">
+                        <div class="panel-group document-group" id="accordion" role="tablist">
+                            <%for(var g in groups){%>
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="headingOne">
+                                        <h4 class="card-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<%-g%>" aria-controls="collapse_<%-g%>" class="sec_group">
+                                                <%-groups[g].title%>
+                                                    <div class="secImg">
+                                                    </div>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse_<%-g%>" class="panel-collapse collapse <%if(group==g){%>show<%}%>" aria-labelledby="headingOne">
+                                        <div class="card-body">
+                                            <%-groups[g].toc%>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <%}%>
                         </div>
-                        <%}%>
+                    </div>
                 </div>
+
+
             </div>
 
             <div class="content col-lg-8 col-md-10">
@@ -97,6 +116,53 @@
     <!-- include "../common/footer.html" -->
     <script>
         document.body.addEventListener('touchstart', function () { });
+    </script>
+    <script>
+
+        $(function () {
+            // $(".collapse_documents").click(function(){
+            //     var collapse_documents = $("#collapse_documents").hasClass("show")
+            //     if(collapse_documents){
+            //         $("#collapse_documents").removeClass("show")
+            //     }else{
+            //         $("#collapse_documents").addClass("show")
+            //     }
+            // })
+            var width = window.screen.width;
+            // if (width > 576) {
+            //     $("#collapse_documents").addClass("show")
+            //     $("#firstImg").removeClass("firstDown");
+            //     $("#firstImg").addClass("firstUp");
+            // }
+            // $(".collapse_documents").click(function () {
+            //     if ($("#firstImg").hasClass("firstUp")) {
+            //         $("#firstImg").removeClass("firstUp");
+            //         $("#firstImg").addClass("firstDown");
+            //     } else {
+            //         $("#firstImg").removeClass("firstDown");
+            //         $("#firstImg").addClass("firstUp");
+
+            //     }
+            // })
+            if (width > 576) {
+                $("#collapse_documents").addClass("show")
+                $("#firstImage").attr("src", "../../../../imgs/firstUp.png")
+            }
+            $(".collapse_documents").click(function () {
+                if ($("#firstImage").attr("src") === "../../../../imgs/firstUp.png") {
+                    $("#firstImage").attr("src", "../../../../imgs/firstDown.png")
+                } else {
+                    $("#firstImage").attr("src", "../../../../imgs/firstUp.png")
+                }
+            })
+
+
+            // $(".sec_group").click(function(e){
+            //     alert("E:"+JSON.stringify(e))
+            // })
+            // var firstTitle = $(".firstTitle");
+            // if(firstTitle.attr())
+        })
     </script>
 </body>
 

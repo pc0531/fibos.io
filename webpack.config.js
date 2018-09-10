@@ -296,7 +296,7 @@ var webpack_config = {
   output: {
     path: 'web/dist',
     publicPath: '/',
-    filename: 'js/[name].js',
+    filename: 'js/[name].[chunkhash:8].js',
     chunkFilename: 'js/[id].js'
   },
   resolve: {
@@ -357,7 +357,7 @@ var webpack_config = {
         NODE_ENV: JSON.stringify('production')
       }
     }),
-    new ExtractTextPlugin('css/[name].css'),
+    new ExtractTextPlugin('css/[name].[chunkhash:8].css'),
     new CopyWebpackPlugin([
       {
         from: path.resolve('./web/src/imgs'),
