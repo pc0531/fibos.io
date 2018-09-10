@@ -497,55 +497,63 @@ import 'common';
 $(function () {
     var localLanguage = localStorage.getItem("fibosLanguage")
     if (localLanguage) {
-      changeLanguage(JSON.parse(localLanguage))
+        changeLanguage(JSON.parse(localLanguage))
     } else {
-      changeLanguage('zh');
+        changeLanguage('zh');
     }
-  
+
     function changeLanguage(language) {
-      localStorage.setItem('fibosLanguage', JSON.stringify(language))
-      setCookie(language);
-      jQuery.i18n.properties({
-        name: 'strings', //资源文件名称
-        path: '../../i18n/', //资源文件路径
-        mode: 'map', //用Map的方式使用资源文件中的值
-        language: `${language === 'zh' ? 'zh' : 'en'} `,
-        callback: function () {//加载成功后设置显示内容
-            $('#Home').html($.i18n.prop('Home'));
-            $('#Roadmap').html($.i18n.prop('Roadmap'));
-            $('#DEV_Community').html($.i18n.prop('DEV_Community'));
-            $('#Documentation').html($.i18n.prop('Documentation'));
-            $('#DEV_Guides').html($.i18n.prop('DEV_Guides'));
-            $('#Basic_Modules').html($.i18n.prop('Basic_Modules'));
-            $('#Built_in_Objects').html($.i18n.prop('Built_in_Objects'));
-            $('#Language').html($.i18n.prop('Language'));
-            $('#ToHome').html($.i18n.prop('ToHome'));
-            $('#ContactUs').html($.i18n.prop('ContactUs'));
-            $('#News').html($.i18n.prop('News'));
-            $('#Download').html($.i18n.prop('Download'));
-            $('#News1').html($.i18n.prop('News1'));
-            $('#News2').html($.i18n.prop('News2'));
-            $('#DEV_Guides1').html($.i18n.prop('DEV_Guides1'));
-            $('#Basic_Modules1').html($.i18n.prop('Basic_Modules1'));
-            $('#Built_in_Objects1').html($.i18n.prop('Built_in_Objects1'));
-            $('#Doc').html($.i18n.prop('Doc'));
-            $('#NewsRec').html($.i18n.prop('NewsRec'));
-            $('#Dapps').html($.i18n.prop('Dapps'));
-        }
-      });
+        localStorage.setItem('fibosLanguage', JSON.stringify(language))
+        setCookie(language);
+        jQuery.i18n.properties({
+            name: 'strings', //资源文件名称
+            path: '../../i18n/', //资源文件路径
+            mode: 'map', //用Map的方式使用资源文件中的值
+            language: `${language === 'zh' ? 'zh' : 'en'} `,
+            callback: function () {//加载成功后设置显示内容
+                $('#Home').html($.i18n.prop('Home'));
+                $('#Roadmap').html($.i18n.prop('Roadmap'));
+                $('#DEV_Community').html($.i18n.prop('DEV_Community'));
+                $('#Documentation').html($.i18n.prop('Documentation'));
+                $('#DEV_Guides').html($.i18n.prop('DEV_Guides'));
+                $('#Basic_Modules').html($.i18n.prop('Basic_Modules'));
+                $('#Built_in_Objects').html($.i18n.prop('Built_in_Objects'));
+                $('#Language').html($.i18n.prop('Language'));
+                $('#ToHome').html($.i18n.prop('ToHome'));
+                $('#ContactUs').html($.i18n.prop('ContactUs'));
+                $('#News').html($.i18n.prop('News'));
+                $('#Download').html($.i18n.prop('Download'));
+                $('#News1').html($.i18n.prop('News1'));
+                $('#News2').html($.i18n.prop('News2'));
+                $('#DEV_Guides1').html($.i18n.prop('DEV_Guides1'));
+                $('#Basic_Modules1').html($.i18n.prop('Basic_Modules1'));
+                $('#Built_in_Objects1').html($.i18n.prop('Built_in_Objects1'));
+                $('#Doc').html($.i18n.prop('Doc'));
+                $('#NewsRec').html($.i18n.prop('NewsRec'));
+                $('#Dapps').html($.i18n.prop('Dapps'));
+
+                $('#slogan1').html($.i18n.prop('slogan1'))
+                $('#desc1').html($.i18n.prop('desc1'))
+                $('#IndexLink').html($.i18n.prop('IndexLink'))
+                $('#Roadmap1').html($.i18n.prop('Roadmap1'))
+                $('#News0').html($.i18n.prop('News0'))
+                $('#Dapps1').html($.i18n.prop('Dapps1'))
+                $('#DEV_Community1').html($.i18n.prop('DEV_Community1'))
+                $('#Documentation1').html($.i18n.prop('Documentation1'))
+            }
+        });
     }
-  
+
     function setCookie(language) {
-      window.document.cookie = ("lang" + "=" + language + ";");
+        window.document.cookie = ("lang" + "=" + language + ";");
     }
-  
+
     $('#language-zh').click(function () {
-      changeLanguage('zh');
+        changeLanguage('zh');
     })
-  
+
     $('#language-en').click(function () {
-      changeLanguage('en');
-     
+        changeLanguage('en');
+
     })
-  })
-  
+})

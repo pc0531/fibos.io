@@ -4,10 +4,154 @@ import 'bootstrap3'
 // import Vue from '../js/lib/vue.min.js'
 import 'js/icons'
 import '../js/jquery.i18n.properties'
+import moment from 'moment'
 import axios from 'axios'
 
+$(function () {
+  var localLanguage = localStorage.getItem('fibosLanguage')
+  if (localLanguage) {
+    changeLanguage(JSON.parse(localLanguage))
+  } else {
+    changeLanguage('zh')
+  }
+
+  getBlockChainInfo()
+  //setInterval(getPrice, 20000)
+
+  function changeLanguage(language) {
+    localStorage.setItem('fibosLanguage', JSON.stringify(language))
+    setCookie(language)
+    jQuery.i18n.properties({
+      name: 'strings', //资源文件名称
+      path: '../i18n/', //资源文件路径
+      mode: 'map', //用Map的方式使用资源文件中的值
+      language: `${language === 'zh' ? 'zh' : 'en'} `,
+      callback: function () {
+        //加载成功后设置显示内容
+
+        $('#Home').html($.i18n.prop('Home'))
+        $('#Roadmap').html($.i18n.prop('Roadmap'))
+        $('#DEV_Community').html($.i18n.prop('DEV_Community'))
+        $('#Documentation').html($.i18n.prop('Documentation'))
+        $('#DEV_Guides').html($.i18n.prop('DEV_Guides'))
+        $('#Basic_Modules').html($.i18n.prop('Basic_Modules'))
+        $('#Built_in_Objects').html($.i18n.prop('Built_in_Objects'))
+        $('#Language').html($.i18n.prop('Language'))
+        $('#slogan').html($.i18n.prop('slogan'))
+        $('#desc').html($.i18n.prop('desc'))
+        $('#joinin').html($.i18n.prop('joinin'))
+        $('#ExchangeFo').html($.i18n.prop('ExchangeFo'))
+        $('#QuickDev').html($.i18n.prop('QuickDev'))
+        $('#QuickDevDesc').html($.i18n.prop('QuickDevDesc'))
+        $('#StartLearn').html($.i18n.prop('StartLearn'))
+        $('#Characteristic').html($.i18n.prop('Characteristic'))
+        $('#Fast').html($.i18n.prop('Fast'))
+        $('#LowLearn').html($.i18n.prop('LowLearn'))
+        $('#LessRes').html($.i18n.prop('LessRes'))
+        $('#LessRam').html($.i18n.prop('LessRam'))
+        $('#Security').html($.i18n.prop('Security'))
+        $('#Sandbox').html($.i18n.prop('Sandbox'))
+        $('#Auditable').html($.i18n.prop('Auditable'))
+        $('#JavaScriptDev').html($.i18n.prop('JavaScriptDev'))
+        $('#Stable').html($.i18n.prop('Stable'))
+        $('#Bancor').html($.i18n.prop('Bancor'))
+        $('#Onestep').html($.i18n.prop('Onestep'))
+        $('#FIBOSDev').html($.i18n.prop('FIBOSDev'))
+        $('#FIBOSRoadmap').html($.i18n.prop('FIBOSRoadmap'))
+        $('#TestNet').html($.i18n.prop('TestNet'))
+        $('#MainNet').html($.i18n.prop('MainNet'))
+        $('#SmartWallet').html($.i18n.prop('SmartWallet'))
+        $('#Release').html($.i18n.prop('Release'))
+        $('#Partners').html($.i18n.prop('Partners'))
+        $('#FOSmartWallet').html($.i18n.prop('FOSmartWallet'))
+        $('#Supports').html($.i18n.prop('Supports'))
+        $('#VacantSeat').html($.i18n.prop('VacantSeat'))
+        $('#Doc').html($.i18n.prop('Doc'))
+        $('#ContactUs').html($.i18n.prop('ContactUs'))
+        $('#Will').html($.i18n.prop('Will'))
+        $('#DEV_Guides1').html($.i18n.prop('DEV_Guides1'))
+        $('#Basic_Modules1').html($.i18n.prop('Basic_Modules1'))
+        $('#Built_in_Objects1').html($.i18n.prop('Built_in_Objects1'))
+        $('#VacantSeat1').html($.i18n.prop('VacantSeat1'))
+        $('#VacantSeat2').html($.i18n.prop('VacantSeat2'))
+        $('#VacantSeat3').html($.i18n.prop('VacantSeat3'))
+        $('#StrategicPartners').html($.i18n.prop('StrategicPartners'))
+        $('#Buy').html($.i18n.prop('Buy'))
+        $('#Pass').html($.i18n.prop('Pass'))
+        $('#News').html($.i18n.prop('News'))
+        $('#Download').html($.i18n.prop('Download'))
+        $('#Dapps').html($.i18n.prop('Dapps'))
+        $('#Total').html($.i18n.prop('Total'))
+        $('#Rate').html($.i18n.prop('Rate'))
+        $('#MoreWalletDes').html($.i18n.prop('MoreWalletDes'))
+        $('#51TokenDes').html($.i18n.prop('51TokenDes'))
+        $('#OneDes').html($.i18n.prop('OneDes'))
+        $('#BrowserDes').html($.i18n.prop('BrowserDes'))
+        $('#Ironman').html($.i18n.prop('Ironman'))
+        $('#IronmanDes').html($.i18n.prop('IronmanDes'))
+        $('#Tomato ').html($.i18n.prop('Tomato'))
+        $('#TomatoDes').html($.i18n.prop('TomatoDes'))
+        $('#BLExp').html($.i18n.prop('BLExp'))
+        $('#ExchangeFoWord').html($.i18n.prop('ExchangeFoWord'))
+        $('#SafeAndFast').html($.i18n.prop('SafeAndFast'))
+        $('#SQDownload').html($.i18n.prop('SQDownload'))
+        $('#FoTokenDes').html($.i18n.prop('FoTokenDes'))
+        $('#FoWebDes').html($.i18n.prop('FoWebDes'))
+        $('#IndexLink').html($.i18n.prop('IndexLink'))
+        $('#Dapps1').html($.i18n.prop('Dapps1'))
+        $('#Documentation1').html($.i18n.prop('Documentation1'))
+        $('#slogan1').html($.i18n.prop('slogan1'))
+        $('#desc1').html($.i18n.prop('desc1'))
+        $('#Roadmap1').html($.i18n.prop('Roadmap1'))
+        $('#News0').html($.i18n.prop('News0'))
+        $('#DEV_Community1').html($.i18n.prop('DEV_Community1'))
+        $('#Block').html($.i18n.prop('Block'))
+        $('#Deals').html($.i18n.prop('Deals'))
+        $('#Users').html($.i18n.prop('Users'))
+        $('#FoNum').html($.i18n.prop('FoNum'))
+        $('#Fobuy').html($.i18n.prop('Fobuy'))
+        $('#Declare').html($.i18n.prop('Declare'))
+        $('#IMXToken').html($.i18n.prop('IMXToken'))
+        $('#IMXTokenDes').html($.i18n.prop('IMXTokenDes'))
+        $('#FIBOSLo').html($.i18n.prop('FIBOSLo'))
+        $('#FIBOSLoDes').html($.i18n.prop('FIBOSLoDes'))
+        $('#Slow').html($.i18n.prop('Slow'))
+        $('#SlowDes').html($.i18n.prop('SlowDes'))
+        var FastHeight = window.document.getElementById('Fast').scrollHeight
+        var StableHeight = window.document.getElementById('Stable').scrollHeight
+        if (language === 'zh') {
+          $('#QuickDevDesc').css('font-size', '1.2rem')
+          $('#GetStart').css('font-size', '1.2rem')
+          $('#QuickDev').css('font-size', '2rem')
+          $('#StartLearn').css('font-size', '1.3rem')
+        } else {
+          $('#QuickDevDesc').css('font-size', '1.1rem')
+          $('#QuickDev').css('font-size', '1.6rem')
+          $('#GetStart').css('font-size', '1rem')
+          $('#StartLearn').css('font-size', '1rem')
+        }
+        $('#LessRes').css('height', FastHeight)
+        $('#Security').css('height', FastHeight)
+        $('#Auditable').css('height', StableHeight)
+      }
+    })
+  }
+
+  function setCookie(language) {
+    window.document.cookie = 'lang' + '=' + language + ';'
+  }
+
+  $('#language-zh').click(function () {
+    changeLanguage('zh')
+  })
+
+  $('#language-en').click(function () {
+    changeLanguage('en')
+  })
+})
+
 var browser = {
-  versions: (function() {
+  versions: (function () {
     var u = navigator.userAgent,
       app = navigator.appVersion
     return {
@@ -28,20 +172,32 @@ var browser = {
   language: (navigator.browserLanguage || navigator.language).toLowerCase()
 }
 
-function getPrice() {
-  // var protocol = window.location.protocol
-  // var port = window.location.port;
-  // var hostname = window.location.hostname;
-  // var url = protocol + "//" + hostname + port + "/getExchangeInfo";
+function setInfo(data) {
+  $('#BlockNumber').text(data.BlockNumber);
+  $('#TransactionNumber').text(data.TransactionNumber);
+  $('#NumberOfUsers').text(data.NumberOfUsers);
+  $('#FOCirculation').text(data.FOCirculation);
+}
+
+
+function getBlockChainInfo() {
   $.ajax({
     type: 'GET',
     data: {},
-    url: '/1.0/app/getExchangeInfo',
-    success: function(data) {
-      $('#myTargetElement').text(data.price)
+    url: '/1.0/app/getBlockChainInfo',
+    async: false,
+    success: async function (data) {
+      await setInfo(data);
+      new Vue({
+        el: '#tele-app-wrapper',
+        template: `<App />`
+      })
     },
-    error: function() {
-      console.log('')
+    error: function () {
+      new Vue({
+        el: '#tele-app-wrapper',
+        template: `<App />`
+      })
     }
   })
 }
@@ -59,7 +215,7 @@ Vue.component('Message', {
         </div>
         </div>
         <div class="tele-message-time">
-          <span>{{message.date}}</span>
+          <span>{{message.formatDate}}</span>
         </div>
       </div>
     </div>
@@ -73,14 +229,20 @@ Vue.component('App', {
       <div :class="isMobile ? 'hide' : 'bg'">
       <div class="top">
       <div class = "top-title">
-      FIBOS 开发 电报群
+      FIBOS 初学者 电报群
       </div>
       <div class="top-member">{{members}} members</div>
       <img src="/imgs/blacklogo.png"/>
       </div>
           <div class="wrap">
           <div :class = "loading ? 'loadingshow':'loadingdis'" >
-          <i class="el-icon-loading" ></i>
+          <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
           </div>
             <ul class="messages" ref="messages">
               <li class="message-container" v-for="message in messages" :key="message.id">
@@ -158,12 +320,12 @@ Vue.component('App', {
       let e = this.$refs.messages
       scroll = e.scrollHeight - e.scrollTop
       if (isHistory) {
-        this.$nextTick(function() {
+        this.$nextTick(function () {
           e.scrollTop = e.scrollHeight
         })
       }
       if (scroll >= 300 && scroll <= 600) {
-        this.$nextTick(function() {
+        this.$nextTick(function () {
           e.scrollTop = e.scrollHeight
         })
       }
@@ -172,16 +334,21 @@ Vue.component('App', {
       this.members = data
     },
     transferMessage(messages) {
-      return messages.map(function(ele) {
+      return messages.map(function (ele) {
         if (ele.text) {
           var escapetext = escape(ele.text)
           var escapetextlist = escapetext.split('%0A')
-          var messagelist = escapetextlist.map(function(ele) {
+          var messagelist = escapetextlist.map(function (ele) {
             return unescape(ele)
           })
           ele.messagelist = messagelist
-          return ele
+          
         }
+        if(ele.unixDate){
+          var formatDate = moment.unix(ele.unixDate).format("HH:mm")
+          ele.formatDate = formatDate;
+        }
+        return ele
       })
     },
     async getLastPageMessage(page) {
@@ -221,7 +388,7 @@ Vue.component('App', {
       // let currentPage = this.currentPage;
       // scroll = e.scrollHeight - e.scrollTop;
       let that = this
-      $('.messages').scroll(function() {
+      $('.messages').scroll(function () {
         if (e.scrollTop === 0 && that.currentPage <= that.pageCount && !that.loading) {
           //alert("scrollHeight:" + e.scrollHeight);
           let currentHeight = e.scrollHeight
@@ -291,128 +458,3 @@ Vue.component('App', {
   }
 })
 
-new Vue({
-  el: '#tele-app-wrapper',
-  template: `<App />`
-})
-
-$(function() {
-  getPrice()
-  setInterval(getPrice, 20000)
-  var localLanguage = localStorage.getItem('fibosLanguage')
-  if (localLanguage) {
-    changeLanguage(JSON.parse(localLanguage))
-  } else {
-    changeLanguage('zh')
-  }
-
-  function changeLanguage(language) {
-    localStorage.setItem('fibosLanguage', JSON.stringify(language))
-    setCookie(language)
-    jQuery.i18n.properties({
-      name: 'strings', //资源文件名称
-      path: '../i18n/', //资源文件路径
-      mode: 'map', //用Map的方式使用资源文件中的值
-      language: `${language === 'zh' ? 'zh' : 'en'} `,
-      callback: function() {
-        //加载成功后设置显示内容
-
-        $('#Home').html($.i18n.prop('Home'))
-        $('#Roadmap').html($.i18n.prop('Roadmap'))
-        $('#DEV_Community').html($.i18n.prop('DEV_Community'))
-        $('#Documentation').html($.i18n.prop('Documentation'))
-        $('#DEV_Guides').html($.i18n.prop('DEV_Guides'))
-        $('#Basic_Modules').html($.i18n.prop('Basic_Modules'))
-        $('#Built_in_Objects').html($.i18n.prop('Built_in_Objects'))
-        $('#Language').html($.i18n.prop('Language'))
-        $('#slogan').html($.i18n.prop('slogan'))
-        $('#desc').html($.i18n.prop('desc'))
-        $('#joinin').html($.i18n.prop('joinin'))
-        $('#ExchangeFo').html($.i18n.prop('ExchangeFo'))
-        $('#QuickDev').html($.i18n.prop('QuickDev'))
-        $('#QuickDevDesc').html($.i18n.prop('QuickDevDesc'))
-        $('#StartLearn').html($.i18n.prop('StartLearn'))
-        $('#Characteristic').html($.i18n.prop('Characteristic'))
-        $('#Fast').html($.i18n.prop('Fast'))
-        $('#LowLearn').html($.i18n.prop('LowLearn'))
-        $('#LessRes').html($.i18n.prop('LessRes'))
-        $('#LessRam').html($.i18n.prop('LessRam'))
-        $('#Security').html($.i18n.prop('Security'))
-        $('#Sandbox').html($.i18n.prop('Sandbox'))
-        $('#Auditable').html($.i18n.prop('Auditable'))
-        $('#JavaScriptDev').html($.i18n.prop('JavaScriptDev'))
-        $('#Stable').html($.i18n.prop('Stable'))
-        $('#Bancor').html($.i18n.prop('Bancor'))
-        $('#Onestep').html($.i18n.prop('Onestep'))
-        $('#FIBOSDev').html($.i18n.prop('FIBOSDev'))
-        $('#btn-bancor-download').html($.i18n.prop('btn-bancor-download'))
-        $('#FIBOSRoadmap').html($.i18n.prop('FIBOSRoadmap'))
-        $('#TestNet').html($.i18n.prop('TestNet'))
-        $('#MainNet').html($.i18n.prop('MainNet'))
-        $('#SmartWallet').html($.i18n.prop('SmartWallet'))
-        $('#Release').html($.i18n.prop('Release'))
-        $('#Partners').html($.i18n.prop('Partners'))
-        $('#FOSmartWallet').html($.i18n.prop('FOSmartWallet'))
-        $('#Supports').html($.i18n.prop('Supports'))
-        $('#VacantSeat').html($.i18n.prop('VacantSeat'))
-        $('#Doc').html($.i18n.prop('Doc'))
-        $('#ContactUs').html($.i18n.prop('ContactUs'))
-        $('#Will').html($.i18n.prop('Will'))
-        $('#DEV_Guides1').html($.i18n.prop('DEV_Guides1'))
-        $('#Basic_Modules1').html($.i18n.prop('Basic_Modules1'))
-        $('#Built_in_Objects1').html($.i18n.prop('Built_in_Objects1'))
-        $('#VacantSeat1').html($.i18n.prop('VacantSeat1'))
-        $('#VacantSeat2').html($.i18n.prop('VacantSeat2'))
-        $('#VacantSeat3').html($.i18n.prop('VacantSeat3'))
-        $('#StrategicPartners').html($.i18n.prop('StrategicPartners'))
-        $('#Buy').html($.i18n.prop('Buy'))
-        $('#Pass').html($.i18n.prop('Pass'))
-        $('#News').html($.i18n.prop('News'))
-        $('#Download').html($.i18n.prop('Download'))
-        $('#Dapps').html($.i18n.prop('Dapps'))
-        $('#Total').html($.i18n.prop('Total'))
-        $('#Rate').html($.i18n.prop('Rate'))
-        $('#MoreWalletDes').html($.i18n.prop('MoreWalletDes'))
-        $('#51TokenDes').html($.i18n.prop('51TokenDes'))
-        $('#OneDes').html($.i18n.prop('OneDes'))
-        $('#BrowserDes').html($.i18n.prop('BrowserDes'))
-        $('#Ironman').html($.i18n.prop('Ironman'))
-        $('#IronmanDes').html($.i18n.prop('IronmanDes'))
-        $('#Tomato ').html($.i18n.prop('Tomato'))
-        $('#TomatoDes').html($.i18n.prop('TomatoDes'))
-        $('#BLExp').html($.i18n.prop('BLExp'))
-        $('#ExchangeFoWord').html($.i18n.prop('ExchangeFoWord'))
-        $('#SafeAndFast').html($.i18n.prop('SafeAndFast'))
-        $('#SQDownload').html($.i18n.prop('SQDownload'))
-        var FastHeight = window.document.getElementById('Fast').scrollHeight
-        var StableHeight = window.document.getElementById('Stable').scrollHeight
-        if (language === 'zh') {
-          $('#QuickDevDesc').css('font-size', '1.2rem')
-          $('#GetStart').css('font-size', '1.2rem')
-          $('#QuickDev').css('font-size', '2rem')
-          $('#StartLearn').css('font-size', '1.3rem')
-        } else {
-          $('#QuickDevDesc').css('font-size', '1.1rem')
-          $('#QuickDev').css('font-size', '1.6rem')
-          $('#GetStart').css('font-size', '1rem')
-          $('#StartLearn').css('font-size', '1rem')
-        }
-        $('#LessRes').css('height', FastHeight)
-        $('#Security').css('height', FastHeight)
-        $('#Auditable').css('height', StableHeight)
-      }
-    })
-  }
-
-  function setCookie(language) {
-    window.document.cookie = 'lang' + '=' + language + ';'
-  }
-
-  $('#language-zh').click(function() {
-    changeLanguage('zh')
-  })
-
-  $('#language-en').click(function() {
-    changeLanguage('en')
-  })
-})

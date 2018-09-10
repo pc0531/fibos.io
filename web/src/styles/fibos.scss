@@ -54,6 +54,12 @@ body {
       margin-top: 20px;
       height: 60px;
     }
+    @media (max-width: 574px) {
+      .phoneImg {
+        margin-top: 20px;
+        height: 40px;
+      }
+    }
   }
   .navbar-nav .nav-link {
     color: #fff;
@@ -68,6 +74,34 @@ body {
 .navbar-toggler.index-navbar-toggler {
   transform: translateY(0.5rem);
 }
+
+.Buybtn-left{
+  text-align: right;
+}
+
+.Buybtn-right{
+  text-align: left;
+}
+
+@media (max-width: 574px) {
+  .PhoneFooter{
+    display: none;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .Buybtn-left{
+    text-align: center;
+  }
+  
+  .Buybtn-right{
+    text-align: center;
+  }
+}
+
+
 
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-collapse {
@@ -234,6 +268,19 @@ body {
    }
 }
 
+.btn-center {
+  padding: 0.85rem 2.5rem;
+  border-radius: 2px;
+  margin-top: 40px;
+  width: 16rem;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-weight: bold;
+  border: 0;
+  line-height: 33px;
+  height: 60px;
+}
+
 .sectwo{
   padding: 152px 0 62px;
   cursor: pointer;
@@ -380,6 +427,14 @@ section.fo {
     font-weight: 400;
     font-family: 'Open Sans';
   }
+
+  .big-mark-small {
+    font-size: 2rem;
+    color: $green;
+    font-weight: 400;
+    font-family: 'Open Sans';
+  }
+
   .btn-buy {
     margin: 10px 5px 0;
     border-radius: 0;
@@ -599,11 +654,6 @@ section.dapps {
         background-size: 100%;
       }
     }
-    .lastVas{
-      @media (max-width: 768px) {
-      display: none !important;
-    }
-  }
     @media (min-width: 992px) {
       .dapp {
         display: inline-block;
@@ -1126,6 +1176,9 @@ section.links {
 
 #tele.tele-collapse .bg {
   transform: translateX(100%);
+  position: fixed;
+    right: 12px;
+    bottom: 120px;
 }
 
 #tele.tele-collapse .hide {
@@ -1288,5 +1341,64 @@ section.links {
 .foimg {
   @media (max-width: 574px) {
     height: 50px;
+  }
+}
+
+.spinner {
+  margin: 0 auto;
+  width: 50px;
+  height: 20px;
+  text-align: center;
+  font-size: 10px;
+}
+ 
+.spinner > div {
+  background-color: #606266;
+  height: 100%;
+  width: 3px;
+  display: inline-block;
+   
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+ 
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+ 
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+ 
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+ 
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+ 
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) } 
+  20% { -webkit-transform: scaleY(1.0) }
+}
+ 
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
+.lastVas{
+  @media (max-width:574px) {
+    display: none!important;
   }
 }

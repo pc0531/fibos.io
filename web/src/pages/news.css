@@ -190,6 +190,10 @@ body {
   margin: 0 auto;
 }
 
+.page-body .container.row .news-content-container .news-content a{
+  word-break: break-all;
+}
+
 .page-body .container.row .news-content-container .news-content iframe {
   max-width: 100%;
 }
