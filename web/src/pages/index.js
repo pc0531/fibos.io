@@ -4,6 +4,7 @@ import 'bootstrap3'
 // import Vue from '../js/lib/vue.min.js'
 import 'js/icons'
 import '../js/jquery.i18n.properties'
+import moment from 'moment'
 import axios from 'axios'
 
 $(function () {
@@ -110,6 +111,12 @@ $(function () {
         $('#FoNum').html($.i18n.prop('FoNum'))
         $('#Fobuy').html($.i18n.prop('Fobuy'))
         $('#Declare').html($.i18n.prop('Declare'))
+        $('#IMXToken').html($.i18n.prop('IMXToken'))
+        $('#IMXTokenDes').html($.i18n.prop('IMXTokenDes'))
+        $('#FIBOSLo').html($.i18n.prop('FIBOSLo'))
+        $('#FIBOSLoDes').html($.i18n.prop('FIBOSLoDes'))
+        $('#Slow').html($.i18n.prop('Slow'))
+        $('#SlowDes').html($.i18n.prop('SlowDes'))
         var FastHeight = window.document.getElementById('Fast').scrollHeight
         var StableHeight = window.document.getElementById('Stable').scrollHeight
         if (language === 'zh') {
@@ -208,7 +215,7 @@ Vue.component('Message', {
         </div>
         </div>
         <div class="tele-message-time">
-          <span>{{message.date}}</span>
+          <span>{{message.formatDate}}</span>
         </div>
       </div>
     </div>
@@ -335,8 +342,13 @@ Vue.component('App', {
             return unescape(ele)
           })
           ele.messagelist = messagelist
-          return ele
+          
         }
+        if(ele.unixDate){
+          var formatDate = moment.unix(ele.unixDate).format("HH:mm")
+          ele.formatDate = formatDate;
+        }
+        return ele
       })
     },
     async getLastPageMessage(page) {

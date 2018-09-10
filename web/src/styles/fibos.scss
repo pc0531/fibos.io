@@ -1396,3 +1396,9 @@ section.links {
     -webkit-transform: scaleY(1.0);
   }
 }
+
+.lastVas{
+  @media (max-width:574px) {
+    display: none!important;
+  }
+}
