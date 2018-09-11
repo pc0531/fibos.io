@@ -622,6 +622,7 @@ section.raise {
   }
 }
 
+
 section.dapps {
   color: #333;
   background: #f6f6f6 url('../imgs/dapp-bg.png') top center no-repeat;
@@ -702,8 +703,8 @@ section.dapps {
 
 section.cooperation {
   color: #333;
-  // background: #f6f6f6 url('../imgs/dapp-bg.png') top center no-repeat;
-  // background-size: contain;
+  background: #f6f6f6 url('../imgs/dapp-bg.png') top center no-repeat;
+  background-size: contain;
   padding: 135px 0 125px;
   .title {
     text-align: center;
@@ -790,7 +791,8 @@ section.news {
     }
   }
   .news-list {
-    padding: 0 3rem;
+    padding: 0 1rem;
+    margin-bottom: 20px;
     .media {
       margin-bottom: 1.25rem;
     }
@@ -802,7 +804,39 @@ section.news {
         font-size: 1.125rem;
         color: #333;
       }
+
+      a{
+        color: #999;
+        text-decoration: none;
+      }
     }
+  }
+  .more-news {
+    margin: 10px 5px 0;
+    border-radius: 0;
+    padding: 0.85rem 2rem;
+    border: 1px solid $primary;
+    border-radius: 2px;
+    width: 16rem;
+    font-weight: bold;
+  }
+
+  .news-mark{
+    width: 15px;
+    height: 15px;
+    background: rgb(230, 230, 230);
+    border-radius: 9%;
+    float: left;
+    margin: 3px 10px 3px 3px;
+  }
+
+  .news-content{
+    padding-left: 30px;
+  }
+
+  .news-title{
+    word-break: break-all;
+    padding-left: 28px;
   }
 }
 

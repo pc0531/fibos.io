@@ -17,7 +17,7 @@
         })();
     </script> 
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
-    <link href="/css/common.css" rel="stylesheet">
+    <!-- <link href="/css/common.css" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -647,6 +647,125 @@
             </div>
         </div>
     </section>
+
+    <a name="fibos-news" style="height: 0"></a>
+    <section class="news">
+        <div class="container">
+
+            <div class="col-12">
+                <h2 class="h1 title" id="FIBOSNews">FIBOS 新闻动态</h2>
+                <div class="title-sub"></div>
+            </div>
+            <div class="news-list row">
+                <!-- <img class="mr-3" src="/imgs/news-cover1.jpg" alt="Generic placeholder image"> -->
+
+
+                {{#each news}}
+                <div class="media col-lg-6 col-md-6 col-sm-12">
+                    <div class="media-body">
+                        <a href="{{path}} " target="_blank">
+                            <h5 class="mt-0">
+                                <div class="news-mark"></div>
+                                <div class="news-title">{{ title }}</div>
+                            </h5>
+                            <div class="news-content">
+                                {{describe}}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {{/each}}
+
+                <!-- <div class="media col-lg-6 col-md-6 col-sm-12">
+                        <div class="media-body">
+                            <a href="{{path}} " target="_blank">
+                                <h5 class="mt-0">
+                                    <div class="news-mark"></div>
+                                    <div class="news-title">阿萨飒飒发的说年的金卡说不定尽快把数据库的阿克苏甲方年的金卡说不定尽快把数据库的阿克苏甲方法</div>
+                                </h5>
+                                <div class="news-content">
+                                    阿萨德那数据库电脑卡几十年的金卡说不定尽快把数据库的阿克苏甲方节哀顺变房间卡萨部分节哀顺变房间爱上你付款哦啊是念佛奥术大师大撒大所大所大所多
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="media col-lg-6 col-md-6 col-sm-12">
+                        <div class="media-body">
+                            <a href="{{path}} " target="_blank">
+                                <h5 class="mt-0">
+                                    <div class="news-mark"></div>
+                                    阿萨飒飒发的说法
+                                </h5>
+                                <div class="news-content">
+                                    阿萨德那数据库电脑卡几十年的金卡说不定尽快把数据库的阿克苏甲方节哀顺变房间卡萨部分节哀顺变房间爱上你付款哦啊是念佛奥术大师大撒大所大所大所多
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="media col-lg-6 col-md-6 col-sm-12">
+                        <div class="media-body">
+                            <a href="{{path}} " target="_blank">
+                                <h5 class="mt-0">
+                                    <div class="news-mark"></div>
+                                    阿萨飒飒发的说法
+                                </h5>
+                                <div class="news-content">
+                                    阿萨德那数据库电脑卡几十年的金卡说不定尽快把数据库的阿克苏甲方节哀顺变房间卡萨部分节哀顺变房间爱上你付款哦啊是念佛奥术大师大撒大所大所大所多
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="media col-lg-6 col-md-6 col-sm-12">
+                        <div class="media-body">
+                            <a href="{{path}} " target="_blank">
+                                <h5 class="mt-0">
+                                    <div class="news-mark"></div>
+                                    阿萨飒飒发的说法
+                                </h5>
+                                <div class="news-content">
+                                    阿萨德那数据库电脑卡几十年的金卡说不定尽快把数据库的阿克苏甲方节哀顺变房间卡萨部分节哀顺变房间爱上你付款哦啊是念佛奥术大师大撒大所大所大所多
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="media col-lg-6 col-md-6 col-sm-12">
+                        <div class="media-body">
+                            <a href="{{path}} " target="_blank">
+                                <h5 class="mt-0">
+                                    <div class="news-mark"></div>
+                                    阿萨飒飒发的说法
+                                </h5>
+                                <div class="news-content">
+                                    阿萨德那数据库电脑卡几十年的金卡说不定尽快把数据库的阿克苏甲方节哀顺变房间卡萨部分节哀顺变房间爱上你付款哦啊是念佛奥术大师大撒大所大所大所多
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="media col-lg-6 col-md-6 col-sm-12">
+                        <div class="media-body">
+                            <a href="{{path}} " target="_blank">
+                                <h5 class="mt-0">
+                                    <div class="news-mark"></div>
+                                    阿萨飒飒发的说法
+                                </h5>
+                                <div class="news-content">
+                                    阿萨德那数据库电脑卡几十年的金卡说不定尽快把数据库的阿克苏甲方节哀顺变房间卡萨部分节哀顺变房间爱上你付款哦啊是念佛奥术大师大撒大所大所大所多
+                                </div>
+                            </a>
+                        </div>
+                    </div> -->
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <a id="MoreNews" href="news.html" class="btn btn-lg btn-white more-news" style="    background-color: #19d;
+                    color: white;" target="_blank">
+                    更多新闻</a>
+            </div>
+        </div>
+    </section>
+
+
+
     <section class="cooperation">
         <div class="container">
             <div class="row">
@@ -720,56 +839,6 @@
             </div>
         </div>
     </section>
-    <a name="fibos-news" style="height: 0"></a>
-    <!-- <section class="news">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="h1 title">FIBOS 新闻动态</h2>
-                    <div class="title-sub"></div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                    <div class="card topic">
-                        <img class="card-img-top" src="/imgs/news-cover.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">亚洲区块链中心和欧洲区块链中心合作正式启动</h5>
-                            <p class="card-text">欧亚区块链中心论坛也成功举办,深入探讨了欧洲和亚洲区块链发展趋势。 ... 执行长，研究开发以太坊的区块浏览器和数据平台的MatthewTan，CoinGecko ... 马来西亚的区块链产业也得到NEM国际组织基金会的推动，该基金会...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 news-list">
-                    <div class="media">
-                        <img class="mr-3" src="/imgs/news-cover1.jpg" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h5 class="mt-0">开发社区动态一条</h5>
-                            欧亚区块链中心论坛也成功举办,深入探讨了欧洲和亚洲区块链发展趋势。 ... 执行长，研究开发以太坊的区块浏览器和数据平台的MatthewTan，CoinGecko ... 马来西亚的区块链 ...
-                        </div>
-                    </div>
-                    <div class="media">
-                        <img class="mr-3" src="/imgs/news-cover2.jpg" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h5 class="mt-0">媒体对 FIBOS 的报道一条</h5>
-                            欧亚区块链中心论坛也成功举办,深入探讨了欧洲和亚洲区块链发展趋势。 ... 执行长，研究开发以太坊的区块浏览器和数据平台的MatthewTan，CoinGecko ... 马来西亚的区块链 ...
-                        </div>
-                    </div>
-                    <div class="media">
-                        <img class="mr-3" src="/imgs/news-cover3.jpg" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h5 class="mt-0">区块链技术动态一条</h5>
-                            欧亚区块链中心论坛也成功举办,深入探讨了欧洲和亚洲区块链发展趋势。 ... 执行长，研究开发以太坊的区块浏览器和数据平台的MatthewTan，CoinGecko ... 马来西亚的区块链 ...
-                        </div>
-                    </div>
-                    <div class="media">
-                        <img class="mr-3" src="/imgs/news-cover4.jpg" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h5 class="mt-0">FIBOS 项目进度一条</h5>
-                            欧亚区块链中心论坛也成功举办,深入探讨了欧洲和亚洲区块链发展趋势。 ... 执行长，研究开发以太坊的区块浏览器和数据平台的MatthewTan，CoinGecko ... 马来西亚的区块链 ...
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
     <footer>
         <section class="links">
             <div class="container">
