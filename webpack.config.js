@@ -134,6 +134,11 @@ function build_docs() {
         title: 'FIBOS 扩展应用',
         path: 'guide/community'
       },
+      communitydocuments: {
+        etitle: 'Communitydocuments',
+        title: 'FIBOS 社区文档',
+        path: 'guide/communitydocuments'
+      },
       // guide: {
       //   etitle: 'Guide',
       //   title: '开发指南',
@@ -148,12 +153,8 @@ function build_docs() {
         etitle: 'Object',
         title: '内置对象',
         path: 'manual/object'
-      }
-      // awesome: {
-      //   etitle: 'Awesome',
-      //   title: '社区文档',
-      //   path: 'awesome'
-      // },
+      },
+     
     }
   };
 

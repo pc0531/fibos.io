@@ -20,6 +20,7 @@
 <li><a href=../../../guide/joinfibos/howtobeproducerinfibos.md.html>在 FIBOS 主网中申请注册  BP 节点</a></li>
 <li><a href=../../../guide/joinfibos/createaccountnotfree.md.html>如何帮助别人在 FIBOS 中创建账号</a></li>
 <li><a href=../../../guide/joinfibos/howtocreatetokeninfibos.md.html>如何在 FIBOS 中发行和销毁通证</a></li>
+<li><a href=../../../guide/joinfibos/howtoexchangetokeninfibos.md.html>如何在 FIBOS 中进行智能通证之间的互兑</a></li>
 </ul>
  </div></div></div>  <div class=card><div class=card-header role=tab id=headingOne><h4 class=card-title><a data-toggle=collapse data-parent=#accordion href="#collapse_development" aria-controls="collapse_development" class=sec_group> FIBOS TestNet <div class=secImg></div></a></h4></div><div id="collapse_development" class="panel-collapse collapse " aria-labelledby=headingOne><div class=card-body> <ul>
 <li><a href=../../../guide/development/abouttestnet.md.html>FIBOS TestNet 是什么？</a></li>
@@ -194,6 +195,43 @@
 <li>name: String, <a href=action.md.html>action</a> 名称</li>
 <li>args: Object, <a href=action.md.html>action</a> 附带的数据</li>
 </ul>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</div><span class="hljs-comment">// hi acction</span>
+exports.hi =&gt; (user) {
+    <span class="hljs-comment">// 触发hi2 action</span>
+    trans.send_inline(
+        <span class="hljs-string">"test"</span>,
+        <span class="hljs-string">"hi2"</span>, {
+            <span class="hljs-attr">user</span>: <span class="hljs-string">"user1"</span>,
+            <span class="hljs-attr">friend</span>: <span class="hljs-string">"user2"</span>
+        }, [{
+            <span class="hljs-string">"actor"</span>: <span class="hljs-string">"${name}"</span>,
+            <span class="hljs-string">"permission"</span>: <span class="hljs-string">"active"</span>
+        }])
+};
+
+<span class="hljs-comment">// hi2 action</span>
+exports.hi2 = <span class="hljs-function">(<span class="hljs-params">user, friend</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(user, friend);
+}
+</code></pre>
 <hr>
 <h3 id="send_context_free_inline">send_context_free_inline</h3>
 <p><strong>向特定帐号发送 context_free inline <a href=action.md.html>action</a></strong></p>
@@ -209,6 +247,39 @@
 <li>name: String, <a href=action.md.html>action</a> 名称</li>
 <li>args: Object, <a href=action.md.html>action</a> 附带的数据</li>
 </ul>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</div><span class="hljs-comment">// hi acction</span>
+exports.hi =&gt; (user) {
+    <span class="hljs-comment">// 触发hi2 action</span>
+    trans.send_context_free_inline(
+        <span class="hljs-string">"test"</span>,
+        <span class="hljs-string">"hi2"</span>, {
+            <span class="hljs-attr">user</span>: <span class="hljs-string">"user1"</span>,
+            <span class="hljs-attr">friend</span>: <span class="hljs-string">"user2"</span>
+        }
+    );
+};
+
+<span class="hljs-comment">// hi2 action</span>
+exports.hi2 = <span class="hljs-function">(<span class="hljs-params">user, friend</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(user, friend);
+}
+</code></pre>
  </div></div><div class="sidebar col-lg-2 hidden-xssss hidden-xs hidden-sm hidden-md"><div id=toc></div></div></div></div><footer><section class=links><div class=container><div class=row><div class="col-lg-3 col-md-3 col-sm-3 col-12 PhoneFooter"><h5>FIBOS</h5><ul><li id=slogan1>开发者友好的区块链生态系统</li><li id=desc1>JavaScript 开发 + BANCOR 协议智能通证 + 开发者服务，FIBOS 平台实现了快速开发、快速部署和稳定且流动的通证体系，帮助开发者一步进入区块链时代。</li></ul></div><div class="col-lg-2 col-md-2 col-sm-2 col-12 PhoneFooter"><h5 id=IndexLink>站内链接</h5><ul><li><a href=../../../../#roadmap id=Roadmap1>路线图</a></li><li><a href=../../../../news.html id=News0>新闻</a></li><li><a href=http://bbs.fibos.io target=_blank>BBS</a></li><li><a href=../../../../#dapps id=Dapps1>社区应用</a></li></ul></div><div class="col-lg-3 col-md-3 col-sm-3 col-12"><h5 id=DEV_Community1>开发社区</h5><ul><li><a href=../../../../docs/guide/basic/about.md.html id=Documentation1>开发者文档</a></li><li><a href=https://github.com/fibosio target=_blank>Github</a></li><li><a href=../../../../faq.html>FAQ</a></li></ul></div><div class="col-lg-4 col-md-4 col-sm-4 col-12"><h5 id=ContactUs>联系我们</h5><ul class=social-media><li><a class=qrcodeContainer href=javascript:void(0)><img src=../../../../imgs/wechat.png alt=""> <img class=qrcodeImg src=../../../../imgs/qrcode.jpeg alt=""></a></li><li><a href=https://twitter.com/fibos_io target=_blank><img src=../../../../imgs/twitter.png alt=""></a></li><li><a href=https://t.me/FIBOSIO target=_blank><img src=../../../../imgs/telegram.png alt=""></a></li><li><a href=https://github.com/FIBOSIO target=_blank><img src=../../../../imgs/github.png alt=""></a></li></ul></div></div></div></section><section class=copyright><div class=container><p class=text-center>Copyright © 2018 <a href=https://fibos.io target=_blank>FIBOS</a>&nbsp;<span class=text-span>FOUNDATION LTD All Rights Reserved</span></p></div></section></footer><script>document.body.addEventListener('touchstart', function () { });</script><script>$(function () {
             // $(".collapse_documents").click(function(){
             //     var collapse_documents = $("#collapse_documents").hasClass("show")

@@ -20,6 +20,7 @@
 <li><a href=../../../guide/joinfibos/howtobeproducerinfibos.md.html>在 FIBOS 主网中申请注册  BP 节点</a></li>
 <li><a href=../../../guide/joinfibos/createaccountnotfree.md.html>如何帮助别人在 FIBOS 中创建账号</a></li>
 <li><a href=../../../guide/joinfibos/howtocreatetokeninfibos.md.html>如何在 FIBOS 中发行和销毁通证</a></li>
+<li><a href=../../../guide/joinfibos/howtoexchangetokeninfibos.md.html>如何在 FIBOS 中进行智能通证之间的互兑</a></li>
 </ul>
  </div></div></div>  <div class=card><div class=card-header role=tab id=headingOne><h4 class=card-title><a data-toggle=collapse data-parent=#accordion href="#collapse_development" aria-controls="collapse_development" class=sec_group> FIBOS TestNet <div class=secImg></div></a></h4></div><div id="collapse_development" class="panel-collapse collapse " aria-labelledby=headingOne><div class=card-body> <ul>
 <li><a href=../../../guide/development/abouttestnet.md.html>FIBOS TestNet 是什么？</a></li>
@@ -197,6 +198,15 @@ fibos.setcodeSync(name, <span class="hljs-number">0</span>, <span class="hljs-nu
 <ul>
 <li>Boolean, 账户存在则返回 true，不存在返回 false</li>
 </ul>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3
+4</div>exports.hi = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (action.is_account(account)) <span class="hljs-built_in">console</span>.notice(<span class="hljs-string">"account exists"</span>);
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">console</span>.error(<span class="hljs-string">"account notexists"</span>)
+};
+</code></pre>
 <hr>
 <h3 id="has_recipient">has_recipient</h3>
 <p><strong>action 执行成后，名为 name 的账号是否会收到通知</strong></p>
@@ -210,6 +220,15 @@ fibos.setcodeSync(name, <span class="hljs-number">0</span>, <span class="hljs-nu
 <ul>
 <li>Boolean, 若名为 name 的账户会收到通知则返回 true，否则返回 false</li>
 </ul>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3
+4</div>exports.hi = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (action.has_recipient(receiver)) <span class="hljs-built_in">console</span>.notice(<span class="hljs-string">"action received"</span>)
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">console</span>.error(<span class="hljs-string">"action not received"</span>);
+};
+</code></pre>
 <hr>
 <h3 id="require_recipient">require_recipient</h3>
 <p><strong>向通知列表增加特定账号</strong></p>
@@ -219,6 +238,13 @@ fibos.setcodeSync(name, <span class="hljs-number">0</span>, <span class="hljs-nu
 <ul>
 <li>name: String, 账户名</li>
 </ul>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3</div>exports.hi = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    action.require_recipient(action.receiver);
+};
+</code></pre>
 <hr>
 <h3 id="has_auth">has_auth</h3>
 <p><strong>验证 action 是否需要特定账户的授权</strong></p>
@@ -232,6 +258,13 @@ fibos.setcodeSync(name, <span class="hljs-number">0</span>, <span class="hljs-nu
 <ul>
 <li>Boolean, 需要该账户授权则返回 true，否则返回 false</li>
 </ul>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3</div>exports.hi = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (action.has_auth(account)) <span class="hljs-built_in">console</span>.notice(<span class="hljs-string">"action be authed"</span>)
+};
+</code></pre>
 <hr>
 <h3 id="require_auth">require_auth</h3>
 <p><strong>向 action 的授权列表中添加特定账户及对应的权限，若添加失败则会抛出异常</strong></p>
@@ -244,30 +277,72 @@ fibos.setcodeSync(name, <span class="hljs-number">0</span>, <span class="hljs-nu
 <li>name: String, 待验证的账号名</li>
 <li>permission: String, 需要该账户授权的权限</li>
 </ul>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3</div>exports.hi = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (action.require_auth(account)) <span class="hljs-built_in">console</span>.notice(<span class="hljs-string">"auth success"</span>)
+};
+</code></pre>
 <h2 id="静态属性">静态属性</h2>
 <h3 id="name">name</h3>
-<p><strong>String, * @brief action 名称</strong></p>
+<p><strong>String, action 名称</strong></p>
 <pre><code class="lang-JavaScript"><div class="line-numbers">1</div><span class="hljs-keyword">static</span> readonly <span class="hljs-built_in">String</span> action.name;
+</code></pre>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3</div>exports.hi = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(action.name)
+};
 </code></pre>
 <hr>
 <h3 id="account">account</h3>
 <p><strong>String, action 发送者的账户名</strong></p>
 <pre><code class="lang-JavaScript"><div class="line-numbers">1</div><span class="hljs-keyword">static</span> readonly <span class="hljs-built_in">String</span> action.account;
 </code></pre>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3</div>exports.hi = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(action.account)
+};
+</code></pre>
 <hr>
 <h3 id="receiver">receiver</h3>
 <p><strong>String, action 接收者</strong></p>
 <pre><code class="lang-JavaScript"><div class="line-numbers">1</div><span class="hljs-keyword">static</span> readonly <span class="hljs-built_in">String</span> action.receiver;
+</code></pre>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3</div>exports.hi = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(action.receiver)
+};
 </code></pre>
 <hr>
 <h3 id="publication_time">publication_time</h3>
 <p><strong>Number, 返回从1970年1月1日0时0分0秒（UTC，即协调世界时）距离出块时间的毫秒数。</strong></p>
 <pre><code class="lang-JavaScript"><div class="line-numbers">1</div><span class="hljs-keyword">static</span> readonly <span class="hljs-built_in">Number</span> action.publication_time;
 </code></pre>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3</div>exports.hi = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(action.publication_time)
+};
+</code></pre>
 <hr>
 <h3 id="authorization">authorization</h3>
 <p><strong>Array, 执行该 action 需要得到数组中所有账户的授权</strong></p>
 <pre><code class="lang-JavaScript"><div class="line-numbers">1</div><span class="hljs-keyword">static</span> readonly <span class="hljs-built_in">Array</span> action.authorization;
+</code></pre>
+<p>实例：</p>
+<pre><code class="lang-JavaScript"><div class="line-numbers">1
+2
+3</div>exports.hi = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(action.authorization)
+};
 </code></pre>
  </div></div><div class="sidebar col-lg-2 hidden-xssss hidden-xs hidden-sm hidden-md"><div id=toc></div></div></div></div><footer><section class=links><div class=container><div class=row><div class="col-lg-3 col-md-3 col-sm-3 col-12 PhoneFooter"><h5>FIBOS</h5><ul><li id=slogan1>开发者友好的区块链生态系统</li><li id=desc1>JavaScript 开发 + BANCOR 协议智能通证 + 开发者服务，FIBOS 平台实现了快速开发、快速部署和稳定且流动的通证体系，帮助开发者一步进入区块链时代。</li></ul></div><div class="col-lg-2 col-md-2 col-sm-2 col-12 PhoneFooter"><h5 id=IndexLink>站内链接</h5><ul><li><a href=../../../../#roadmap id=Roadmap1>路线图</a></li><li><a href=../../../../news.html id=News0>新闻</a></li><li><a href=http://bbs.fibos.io target=_blank>BBS</a></li><li><a href=../../../../#dapps id=Dapps1>社区应用</a></li></ul></div><div class="col-lg-3 col-md-3 col-sm-3 col-12"><h5 id=DEV_Community1>开发社区</h5><ul><li><a href=../../../../docs/guide/basic/about.md.html id=Documentation1>开发者文档</a></li><li><a href=https://github.com/fibosio target=_blank>Github</a></li><li><a href=../../../../faq.html>FAQ</a></li></ul></div><div class="col-lg-4 col-md-4 col-sm-4 col-12"><h5 id=ContactUs>联系我们</h5><ul class=social-media><li><a class=qrcodeContainer href=javascript:void(0)><img src=../../../../imgs/wechat.png alt=""> <img class=qrcodeImg src=../../../../imgs/qrcode.jpeg alt=""></a></li><li><a href=https://twitter.com/fibos_io target=_blank><img src=../../../../imgs/twitter.png alt=""></a></li><li><a href=https://t.me/FIBOSIO target=_blank><img src=../../../../imgs/telegram.png alt=""></a></li><li><a href=https://github.com/FIBOSIO target=_blank><img src=../../../../imgs/github.png alt=""></a></li></ul></div></div></div></section><section class=copyright><div class=container><p class=text-center>Copyright © 2018 <a href=https://fibos.io target=_blank>FIBOS</a>&nbsp;<span class=text-span>FOUNDATION LTD All Rights Reserved</span></p></div></section></footer><script>document.body.addEventListener('touchstart', function () { });</script><script>$(function () {
             // $(".collapse_documents").click(function(){
