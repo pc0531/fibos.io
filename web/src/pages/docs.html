@@ -62,7 +62,7 @@
                 <div class="card">
                     <div class="card-header top" role="tab" id="headingOne">
                         <h4 class="card-title">
-                            <a data-toggle="collapse" href="#collapse_documents" aria-controls="collapse_documents" class="collapse_documents">
+                            <a data-toggle="collapse" href="#collapse_devdocuments" aria-controls="collapse_devdocuments" class="collapse_devdocuments">
                                 开发者文档
                                 <!-- <div class="firstImg firstDown" id="firstImg">
                                 </div> -->
@@ -71,7 +71,7 @@
                         </h4>
                     </div>
 
-                    <div id="collapse_documents" class="panel-collapse collapse">
+                    <div id="collapse_devdocuments" class="panel-collapse collapse">
                         <div class="panel-group document-group" id="accordion" role="tablist">
                             <%for(var g in groups){%>
                                 <div class="card">
@@ -145,10 +145,10 @@
             //     }
             // })
             if (width > 576) {
-                $("#collapse_documents").addClass("show")
+                $("#collapse_devdocuments").addClass("show")
                 $("#firstImage").attr("src", "../../../../imgs/firstUp.png")
             }
-            $(".collapse_documents").click(function () {
+            $(".collapse_devdocuments").click(function () {
                 if ($("#firstImage").attr("src") === "../../../../imgs/firstUp.png") {
                     $("#firstImage").attr("src", "../../../../imgs/firstDown.png")
                 } else {

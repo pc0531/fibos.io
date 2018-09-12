@@ -25,7 +25,7 @@ function cssLoaders(options) {
   // generate loader string to be used with extract text plugin
   function generateLoaders(loaders) {
     var sourceLoader = loaders
-      .map(function(loader) {
+      .map(function (loader) {
         var extraParamChar;
         if (/\?/.test(loader)) {
           loader = loader.replace(/\?/, '-loader?');
@@ -64,18 +64,18 @@ function styleLoaders(options) {
 }
 
 marked.setOptions({
-  highlight: function(code, lang) {
+  highlight: function (code, lang) {
     var res;
 
     if (lang)
       try {
         res = highlight.highlight(lang, code).value;
-      } catch (e) {}
+      } catch (e) { }
 
     if (!res)
       try {
         res = highlight.highlightAuto(code).value;
-      } catch (e) {}
+      } catch (e) { }
 
     if (!res) res = code;
 
@@ -88,7 +88,7 @@ marked.setOptions({
   }
 });
 
-marked.Renderer.prototype.heading = function(text, level, raw) {
+marked.Renderer.prototype.heading = function (text, level, raw) {
   return (
     '<h' +
     level +
@@ -134,11 +134,8 @@ function build_docs() {
         title: 'FIBOS 扩展应用',
         path: 'guide/community'
       },
-      communitydocuments: {
-        etitle: 'Communitydocuments',
-        title: 'FIBOS 社区文档',
-        path: 'guide/communitydocuments'
-      },
+      
+
       // guide: {
       //   etitle: 'Guide',
       //   title: '开发指南',
@@ -154,7 +151,13 @@ function build_docs() {
         title: '内置对象',
         path: 'manual/object'
       },
-     
+      documents: {
+        etitle: 'Documents',
+        title: 'FIBOS 社区文档',
+        path: 'guide/documents'
+      },
+      
+
     }
   };
 
@@ -183,7 +186,7 @@ function build_docs() {
     old_dot_cache = JSON.parse(
       fs.readFileSync(path.join(__dirname, 'web/dot_cache.json')).toString()
     );
-  } catch (e) {}
+  } catch (e) { }
 
   var _tmpl = ejs.compile(
     fs.readFileSync(path.join(config.dist, 'docs.html')).toString()
@@ -226,7 +229,7 @@ function build_docs() {
     return '';
   }
 
-  recursiveReadSync(config.from).forEach(function(file) {
+  recursiveReadSync(config.from).forEach(function (file) {
     var basename = path.basename(file);
     if (basename.charAt(0) !== '.') {
       var p = path.relative(config.from, file.toLowerCase());
@@ -271,7 +274,7 @@ function relative() {
   var baseFolder = 'web/dist';
   var re = new RegExp('(href|src)="?(/[^"> ]*)"?', 'g');
 
-  recursiveReadSync(baseFolder).forEach(function(file) {
+  recursiveReadSync(baseFolder).forEach(function (file) {
     if (path.extname(file) == '.html') {
       var file1 = '/' + path.relative(baseFolder, file);
       var p = path.dirname(file1);
@@ -406,7 +409,7 @@ if (prod) {
 
 var pages = path.resolve('./web/src/pages')
 
-recursiveReadSync(pages).forEach(function(file) {
+recursiveReadSync(pages).forEach(function (file) {
   file = path.relative(pages, file);
   var basename = path.basename(file);
 
