@@ -151,10 +151,10 @@ function build_docs() {
         title: '内置对象',
         path: 'manual/object'
       },
-      documents: {
+      comdocuments: {
         etitle: 'Documents',
         title: 'FIBOS 社区文档',
-        path: 'guide/documents'
+        path: 'guide/comdocuments'
       },
       
 
