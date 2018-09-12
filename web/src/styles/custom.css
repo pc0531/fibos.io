@@ -539,6 +539,7 @@ pre div.line-numbers {
 
 .doc-container>.page-body>.container .sidebar {
   margin-bottom: 20px;
+  border-bottom: 1px solid rgb(0,0,0,0.125);
 }
 
 .doc-container>.page-body>.container .sidebar #toc {
@@ -572,7 +573,7 @@ pre div.line-numbers {
   border-radius: 4px;
   background-color: #fff;
   border: 1px solid transparent;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); */
 }
 
 .doc-container>.page-body>.container .card:not(:first-child) {
@@ -580,11 +581,35 @@ pre div.line-numbers {
 }
 
 .doc-container>.page-body>.container .card .card-header {
-  padding: 10px 15px 10px 15px;
+  padding: 10px 0 10px 5px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   border-bottom: 0;
   background-color: #ffffff;
+}
+
+.doc-container>.page-body>.container .card .card-header img{
+  width: 16px;
+  float: right;
+    margin-top: 5px;
+}
+
+.doc-container>.page-body>.container .card .top{
+  border-bottom: 1px solid transparent;
+  padding: 10px 15px 10px 5px;
+  font-size: 18px;
+}
+
+.doc-container>.page-body>.container .card .top img{
+  width: 19px;
+}
+
+.doc-container>.page-body>.container .card #collapse_documents{
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.doc-container>.page-body>.container .card .document-group{
+  padding: 0 10px;
 }
 
 .doc-container>.page-body>.container .card .card-header .card-title {
@@ -592,6 +617,15 @@ pre div.line-numbers {
   margin-bottom: 0;
   font-size: 16px;
 }
+
+.doc-container>.page-body>.container .card .top .card-title{
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 19px;
+}
+
+
+
 
 .doc-container>.page-body>.container .card .card-header .card-title>a {
   display: block;
@@ -713,3 +747,4 @@ section.links .social-media a.qrcodeContainer:hover .qrcodeImg {
 .container .navbar-dark .navbar-nav .nav-link {
   color: #ffffff;
 }
+

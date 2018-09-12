@@ -12,11 +12,11 @@
             $.ajax({
                 type: 'GET',
                 url: 'https://t.me/FIBOSIO',
-                dataType: 'json',
+                dataType: 'jsonp',
                 timeout: 10000,
                 complete: function (request, status) {
-                    if (status === 'timeout') {
-                        $(".t-backgroud").css("display","block")
+                    if (request.status !== 200 ) {
+                        $(".t-backgroud").css("display", "block")
                     } else {
                         window.location.href = "https://t.me/FIBOSIO"
                     }
@@ -57,7 +57,7 @@
 <body>
     <div id="t-title">
         <div class="t-backgroud">
-            <img src="/imgs/bg.png" >
+            <img src="/imgs/bg.png">
             <div class="t-content">
                 <img src="/imgs/avtar.png " class="t-fl">
                 <div class="t-fl t-text">

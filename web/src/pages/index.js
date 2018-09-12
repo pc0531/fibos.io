@@ -117,6 +117,8 @@ $(function () {
         $('#FIBOSLoDes').html($.i18n.prop('FIBOSLoDes'))
         $('#Slow').html($.i18n.prop('Slow'))
         $('#SlowDes').html($.i18n.prop('SlowDes'))
+        $('#FIBOSNews').html($.i18n.prop('FIBOSNews'))
+        $('#MoreNews').html($.i18n.prop('MoreNews'))
         var FastHeight = window.document.getElementById('Fast').scrollHeight
         var StableHeight = window.document.getElementById('Stable').scrollHeight
         if (language === 'zh') {
