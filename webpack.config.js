@@ -112,27 +112,32 @@ function build_docs() {
       basic: {
         etitle: 'Basic',
         title: '基础入门',
-        path: 'guide/basic'
+        path: 'guide/basic',
+        fromcommunity:false
       },
       joinfibos: {
         etitle: 'Joinfibos',
         title: 'FIBOS 基础操作',
-        path: 'guide/joinfibos'
+        path: 'guide/joinfibos',
+        fromcommunity:false
       },
       development: {
         etitle: 'Development',
         title: 'FIBOS TestNet',
-        path: 'guide/development'
+        path: 'guide/development',
+        fromcommunity:false
       },
       advanced: {
         etitle: 'Advanced',
         title: '深入理解 FIBOS',
-        path: 'guide/advanced'
+        path: 'guide/advanced',
+        fromcommunity:false
       },
       community: {
         etitle: 'Community',
         title: 'FIBOS 扩展应用',
-        path: 'guide/community'
+        path: 'guide/community',
+        fromcommunity:false
       },
       
 
@@ -144,20 +149,21 @@ function build_docs() {
       module: {
         etitle: 'Module',
         title: '基础模块',
-        path: 'manual/module'
+        path: 'manual/module',
+        fromcommunity:false
       },
       object: {
         etitle: 'Object',
         title: '内置对象',
-        path: 'manual/object'
+        path: 'manual/object',
+        fromcommunity:false
       },
       comdocuments: {
         etitle: 'Documents',
         title: 'FIBOS 社区文档',
-        path: 'guide/comdocuments'
+        path: 'fromcommunity/comdocuments',
+        fromcommunity:true
       },
-      
-
     }
   };
 

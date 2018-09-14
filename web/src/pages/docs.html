@@ -44,7 +44,15 @@
                 <a href="/" id="ToHome">首页</a>
             </li>
             <li>
-                <a href="/docs/guide/basic/about.md.html" id="DevDoc">&nbsp;开发者文档</a>
+                <a href="/docs/guide/basic/about.md.html" id="DevDoc1">&nbsp;开发者文档</a>
+            </li>
+            <li>
+                <%if(!groups[group].fromcommunity){%>
+                    <a href="/docs/guide/basic/about.md.html" id="DevDoc">&nbsp;开发文档</a>
+                    <%}%>
+                        <%if(groups[group].fromcommunity){%>
+                            <a href="/docs/fromcommunity/comdocuments/communitydocsgitrule.md.html" id="CommunityDoc">&nbsp;社区文档</a>
+                            <%}%>
             </li>
             <li>
                 <a href="<%=groups[group].url%>">
@@ -60,37 +68,77 @@
         <div class="container row">
             <div class="sidebar hidden-xs col-lg-2">
                 <div class="card">
-                    <div class="card-header top" role="tab" id="headingOne">
+                    <div class="card-header top" role="tab">
                         <h4 class="card-title">
-                            <a data-toggle="collapse" href="#collapse_devdocuments" aria-controls="collapse_devdocuments" class="collapse_devdocuments">
-                                开发者文档
+                            <a data-toggle="collapse" href="#collapse_devdocuments" aria-controls="collapse_devdocuments" class="dochead collapse_devdocuments">
+                                开发文档
                                 <!-- <div class="firstImg firstDown" id="firstImg">
                                 </div> -->
-                                <img src="../../../../imgs/firstDown.png" alt="" id="firstImage">
+                                <%if(!groups[group].fromcommunity){%><img src="../../../../imgs/firstUp.png" alt="" class="firstImage"><%}%>
+                                        <%if(groups[group].fromcommunity){%><img src="../../../../imgs/firstDown.png" alt="" class="firstImage"><%}%>
                             </a>
                         </h4>
                     </div>
 
-                    <div id="collapse_devdocuments" class="panel-collapse collapse">
+                    <div id="collapse_devdocuments" class="panel-collapse collapse  <%if(!groups[group].fromcommunity){%>show<%}%>">
                         <div class="panel-group document-group" id="accordion" role="tablist">
                             <%for(var g in groups){%>
-                                <div class="card">
-                                    <div class="card-header" role="tab" id="headingOne">
-                                        <h4 class="card-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<%-g%>" aria-controls="collapse_<%-g%>" class="sec_group">
-                                                <%-groups[g].title%>
-                                                    <div class="secImg">
-                                                    </div>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse_<%-g%>" class="panel-collapse collapse <%if(group==g){%>show<%}%>" aria-labelledby="headingOne">
-                                        <div class="card-body">
-                                            <%-groups[g].toc%>
+                                <%if(!groups[g].fromcommunity){%>
+                                    <div class="card">
+                                        <div class="card-header" role="tab" id="headingOne">
+                                            <h4 class="card-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<%-g%>" aria-controls="collapse_<%-g%>" class="sec_group">
+                                                    <%-groups[g].title%>
+                                                        <div class="secImg">
+                                                        </div>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse_<%-g%>" class="panel-collapse collapse <%if(group==g){%>show<%}%>" aria-labelledby="headingOne">
+                                            <div class="card-body">
+                                                <%-groups[g].toc%>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <%}%>
+                                    <%}%>
+                                        <%}%>
+                        </div>
+                    </div>
+
+                    <div class="card-header top" role="tab">
+                        <h4 class="card-title">
+                            <a data-toggle="collapse" href="#collapse_communitydocuments" aria-controls="collapse_communitydocuments" class="dochead collapse_communitydocuments">
+                                社区文档
+                                <!-- <div class="firstImg firstDown" id="firstImg">
+                                    </div> -->
+                                <%if(groups[group].fromcommunity){%><img src="../../../../imgs/firstUp.png" alt="" class="firstImage"><%}%>
+                                        <%if(!groups[group].fromcommunity){%><img src="../../../../imgs/firstDown.png" alt="" class="firstImage"><%}%>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="collapse_communitydocuments" class="panel-collapse collapse <%if(groups[group].fromcommunity){%>show<%}%>">
+                        <div class="panel-group document-group" id="accordion" role="tablist">
+                            <%for(var g in groups){%>
+                                <%if(groups[g].fromcommunity){%>
+                                    <div class="card">
+                                        <div class="card-header" role="tab" id="headingOne">
+                                            <h4 class="card-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<%-g%>" aria-controls="collapse_<%-g%>" class="sec_group">
+                                                    <%-groups[g].title%>
+                                                        <div class="secImg">
+                                                        </div>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse_<%-g%>" class="panel-collapse collapse <%if(group==g){%>show<%}%>" aria-labelledby="headingOne">
+                                            <div class="card-body">
+                                                <%-groups[g].toc%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                        <%}%>
                         </div>
                     </div>
                 </div>
@@ -120,48 +168,19 @@
     <script>
 
         $(function () {
-            // $(".collapse_documents").click(function(){
-            //     var collapse_documents = $("#collapse_documents").hasClass("show")
-            //     if(collapse_documents){
-            //         $("#collapse_documents").removeClass("show")
-            //     }else{
-            //         $("#collapse_documents").addClass("show")
-            //     }
-            // })
             var width = window.screen.width;
-            // if (width > 576) {
-            //     $("#collapse_documents").addClass("show")
-            //     $("#firstImg").removeClass("firstDown");
-            //     $("#firstImg").addClass("firstUp");
-            // }
-            // $(".collapse_documents").click(function () {
-            //     if ($("#firstImg").hasClass("firstUp")) {
-            //         $("#firstImg").removeClass("firstUp");
-            //         $("#firstImg").addClass("firstDown");
-            //     } else {
-            //         $("#firstImg").removeClass("firstDown");
-            //         $("#firstImg").addClass("firstUp");
-
-            //     }
-            // })
-            if (width > 576) {
-                $("#collapse_devdocuments").addClass("show")
-                $("#firstImage").attr("src", "../../../../imgs/firstUp.png")
-            }
-            $(".collapse_devdocuments").click(function () {
-                if ($("#firstImage").attr("src") === "../../../../imgs/firstUp.png") {
-                    $("#firstImage").attr("src", "../../../../imgs/firstDown.png")
+            $(".dochead").click(function (e) {
+                if ($(this).find('.firstImage').attr("src") === "../../../../imgs/firstUp.png") {
+                    $(this).find('.firstImage').attr("src", "../../../../imgs/firstDown.png")
                 } else {
-                    $("#firstImage").attr("src", "../../../../imgs/firstUp.png")
+                    $(this).find('.firstImage').attr("src", "../../../../imgs/firstUp.png")
                 }
             })
-
-
-            // $(".sec_group").click(function(e){
-            //     alert("E:"+JSON.stringify(e))
-            // })
-            // var firstTitle = $(".firstTitle");
-            // if(firstTitle.attr())
+            if (width <= 576) {
+                $("#collapse_communitydocuments").removeClass("show");
+                $("#collapse_devdocuments").removeClass("show")
+                $('.firstImage').attr("src", "../../../../imgs/firstUp.png")
+            }
         })
     </script>
 </body>

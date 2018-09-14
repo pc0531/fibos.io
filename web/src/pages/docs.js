@@ -610,6 +610,8 @@ $(function () {
                     $('#Dapps1').html($.i18n.prop('Dapps1'))
                     $('#DEV_Community1').html($.i18n.prop('DEV_Community1'))
                     $('#Documentation1').html($.i18n.prop('Documentation1'))
+                    $('#CommunityDoc').html($.i18n.prop('CommunityDoc'))
+                    $('#DevDoc1').html($.i18n.prop('DevDoc1'))
                 }
             });
         }
